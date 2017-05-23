@@ -1,0 +1,74 @@
+@import '../components/common.less';
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout start                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#content{
+    & > .container{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        &.intro-holder{ z-index: 5; }
+        &.gallery-holder{ z-index: 0; }
+    }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout end                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  hold button start                         */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#hold-button{
+    display: inline-block;
+    width: auto;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    transform-origin: 0% 0%;
+    transform: rotate(-90deg) translateX(-50%);
+    overflow: hidden;
+    .circle{
+        display: block;
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        border-radius: 6px;
+        background: @gold;
+        transition: all .4s @easing 0s;
+        transform: translateY(-50%);
+        overflow: hidden;
+    }
+    .text{
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0 27px;
+        font-size: .875em;
+        color: @black;
+        line-height: 16px;
+        position: relative;
+        z-index: 2;
+        transition: all .4s @easing 0s;
+        background: transparent;
+        overflow: hidden;
+    }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  hold button end                           */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  intro start                               */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.container.intro-holder{
+    background: @white;
+
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  intro end                                 */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

@@ -1,9 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+@font-face{
+    font-family: 'Elianto';
+    src:url('../fonts/elianto.eot');
+    src:url('../fonts/elianto.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/elianto.woff') format('woff'),
+        url('../fonts/elianto.ttf') format('truetype'),
+        url('../fonts/elianto.svg#elianto') format('svg');
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  system variables start                    */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@white: #ffffff;
+@gray: #d1d1d1;
+@gold: #d3ab5e;
+@black: #1e1c21;
 
+@lightGreen: #DFF2BF;
+@darkGreen: #4F8A10;
+@lightRed: #FFBABA;
+@darkRed: #D8000C;
+
+@easing: ease-in-out;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  system variables end                      */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  fonts start                               */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+h1, h2, h3, h4, h5, h6,
+p, a, small, span, time,
+input, label, textarea{
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+p, a, small, time, span,
+input, textarea, label{
+    font-size: 1em;
+}
+
+a{
+    text-decoration: none;
+}
+
+small{
+    font-size: .875em;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  fonts end                                 */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -27,12 +75,23 @@
         visibility: hidden;
     }
 }
+
 figure,
-figure > img{
+figure > img,
+img{
     display: block;
     width: 100%;
     height: auto;
     overflow: hidden;
+}
+
+.svg-holder{
+    position: relative;
+    & > svg{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  helpers end                               */

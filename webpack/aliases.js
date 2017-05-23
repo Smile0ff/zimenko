@@ -4,6 +4,8 @@ var path = require('path'),
 const aliases = {
     '@root': jsPath,
     '@pages': path.join(jsPath, 'pages'),
+    '@config': path.join(jsPath, 'config'),
+    '@components': path.join(jsPath, 'components')
 }
 
 module.exports = aliases;

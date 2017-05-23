@@ -31,9 +31,10 @@ gulp.task('css', () => {
 
 gulp.task('fonts', () => {
 
-    var fontsOutPath = path.join(config.build, 'fonts');
+    var fontsInPath = path.join(config.fonts, '/**/*.*'),
+        fontsOutPath = path.join(config.build, 'fonts');
 
-    gulp.src(config.fonts)
+    gulp.src(fontsInPath)
         .pipe(gulp.dest(fontsOutPath));
 
 });
