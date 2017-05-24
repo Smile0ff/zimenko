@@ -11,4 +11,5 @@
 <glyph glyph-name="arrow-left" unicode="&#57345;" d="M512 260l0-8-452 0 0 8z m-452 26l-60-30 60-30z"/>
 <glyph glyph-name="arrow-right" unicode="&#57346;" d="M0 252l0 8 452 0 0-8z m452-26l60 30-60 30z"/>
 <glyph glyph-name="arrow-top" unicode="&#57347;" d="M260 0l-8 0 0 452 8 0z m26 452l-30 60-30-60z"/>
+<glyph glyph-name="close" unicode="&#57348;" d="M507 13c3-2 3-6 0-8-2-3-6-3-8 0l-244 244-244-244c-3-3-6-3-9 0-2 2-2 6 0 8l244 244-245 244c-1 3-1 7 0 10 3 1 7 1 10 0l244-244 244 244c2 2 6 2 8 0 3-3 3-6 0-9l-244-245z"/>
 </font></defs></svg>
