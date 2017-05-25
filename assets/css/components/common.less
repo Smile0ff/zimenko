@@ -167,29 +167,17 @@ body,
         }
     }
     .close-menu-button{
-        width: 60px;
-        height: 60px;
         opacity: 0;
-        border-radius: 50%;
-        background: @gold;
-        visibility: hidden;
         transition: all .4s @easing 0s;
-        & > .icon{
-            display: block;
-            width: 20px;
-            height: 20px;
-            margin: 20px;
-            font-size: 1em;
-            color: @white;
-            text-align: center;
-            overflow: hidden;
-            &:before{ vertical-align: middle; }
-        }
+        visibility: hidden;
     }
     .langs-holder{
         display: inline-block;
         float: right;
         margin: 60px 60px 0 0;
+        opacity: 1;
+        visibility: visible;
+        transition: all .4s @easing 0s;
         overflow: hidden;
         ul{
             display: inline-block;
@@ -240,6 +228,20 @@ body,
             }
         }
     }   
+}
+
+#page.__hold-start #header,
+#page.__hold-active #header{
+    &:before{
+        transition: all 1.6s @easing 0s;
+        transform: scaleX(0);
+    }
+    .open-menu-button,
+    .langs-holder{
+        opacity: 0;
+        visibility: hidden;
+        transition: all .4s @easing 1.6s;
+    }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  header end                			      */
@@ -409,8 +411,11 @@ body,
     top: 50%;
     right: 60px;
     z-index: 15;
+    opacity: 1;
+    transition: all .4s @easing 0s;
     transform-origin: 100% 100%;
     transform: rotate(-90deg) translateX(50%);
+    visibility: visible;
     overflow: hidden;
     ul{
         display: inline-block;
@@ -472,6 +477,13 @@ body,
         }
     }
 }
+
+#page.__hold-start .categories-holder,
+#page.__hold-active .categories-holder{
+    opacity: 0;
+    visibility: hidden;
+    transition: all .8s @easing 1.2s;
+}
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  categories end                            */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -487,6 +499,9 @@ body,
     bottom: 0;
     z-index: 12;
     background: @black;
+    transition: all .4s @easing 0s;
+    transform-origin: 100% 0;
+    transform: scaleX(1);
     overflow: hidden;
     & > .progress-line{
         display: block;
@@ -505,6 +520,12 @@ body,
 
 #page.__menu-active #progress-holder{
     & > .progress-line{ transform: scaleX(1); }
+}
+
+#page.__hold-start #progress-holder,
+#page.__hold-active #progress-holder{
+    transition: all 1.6s @easing 0s;
+    transform: scaleX(0);
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  progress end                              */
