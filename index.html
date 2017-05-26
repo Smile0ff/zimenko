@@ -109,13 +109,13 @@
 					</svg>
 				</a>
 			</div>
-			<div id="open-menu-button" class="open-menu-button">
+			<div class="open-menu-button">
 				<span class="circle"></span>
 				<span class="circle"></span>
 				<span class="circle"></span>
 				<span class="text">Menu</span>
 			</div>
-			<div class="btn-close close-menu-button" id="close-menu-button">
+			<div class="btn-close close-menu-button">
 				<span class="icon icon-close"></span>
 			</div>
 			<div class="langs-holder">
@@ -195,25 +195,18 @@
 					<span class="circle"></span>
 					<span class="text">Click and hold to dive in</span>
 				</div>
-				<div class="hero-title-holder">
-					<div class="svg-holder">
-						<svg class="hero-mask" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-							<defs>
-								<text id="mask-text" class="mask-text" text-anchor="middle" alignment-baseline="middle" x="50%" y="50%" dy="10">Zimenko</text>
-								<mask id="mask" x="0" y="0" width="100%" height="100%">
-									<rect class="mask-rect" x="0" y="0" width="100%" height="100%" />
-									<use xlink:href="#mask-text" />
-								</mask>
-							</defs>
-							<rect class="rect" x="0" y="0" width="100%" height="100%" mask="url(#mask)" />
-							<use xlink:href="#mask-text" mask="url(#mask)" />
-						</svg>
-					</div>
-					<div class="hero-photo">
-						<figure>
-							<img src="build/images/cases/photo.jpg" alt="apartment">
-						</figure>
-					</div>
+				<div class="hero-title-holder svg-holder">
+					<svg class="hero-mask" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+						<defs>
+							<text id="mask-text" class="mask-text" text-anchor="middle" alignment-baseline="middle" x="50%" y="50%" dy="10">Zimenko</text>
+							<mask id="mask" x="0" y="0" width="100%" height="100%">
+								<rect class="mask-rect" x="0" y="0" width="100%" height="100%" />
+								<use xlink:href="#mask-text" />
+							</mask>
+						</defs>
+						<rect class="rect" x="0" y="0" width="100%" height="100%" mask="url(#mask)" />
+						<use xlink:href="#mask-text" mask="url(#mask)" />
+					</svg>
 				</div>
 				<span class="postscript-holder">interior design</span>
 			</section>
@@ -224,30 +217,39 @@
 					<ul class="list-holder">
 						<li class="item-holder active">
 							<figure>
-								<img src="build/images/cases/photo.jpg" alt="apartments">
+								<img src="build/images/cases/photo-1.jpg" alt="apartments">
 							</figure>
 						</li>
 						<li class="item-holder">
 							<figure>
-								<img src="build/images/cases/photo.jpg" alt="apartments">
+								<img src="build/images/cases/photo-2.jpg" alt="apartments">
 							</figure>
 						</li>
 						<li class="item-holder">
 							<figure>
-								<img src="build/images/cases/photo.jpg" alt="apartments">
+								<img src="build/images/cases/photo-3.jpg" alt="apartments">
 							</figure>
 						</li>
 						<li class="item-holder">
 							<figure>
-								<img src="build/images/cases/photo.jpg" alt="apartments">
+								<img src="build/images/cases/photo-2.jpg" alt="apartments">
 							</figure>
 						</li>
 						<li class="item-holder">
 							<figure>
-								<img src="build/images/cases/photo.jpg" alt="apartments">
+								<img src="build/images/cases/photo-1.jpg" alt="apartments">
 							</figure>
 						</li>
 					</ul>
+				</div>
+				<div class="counter-holder">
+					<span class="count current" id="current-count">1</span>
+					<span class="line"></span>
+					<span class="count total">5</span>
+				</div>
+				<div class="arrows-holder" id="arrows-holder">
+					<span class="icon icon-arrow-bottom arrow arrow-bottom"></span>
+					<span class="icon icon-arrow-top arrow arrow-top"></span>
 				</div>
 				<div class="btn-close hold-close">
 					<span class="icon icon-close"></span>

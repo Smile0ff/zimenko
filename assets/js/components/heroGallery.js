@@ -4,12 +4,19 @@ const galleryHolder = $('#hero-gallery');
 const list = galleryHolder.find('.list-holder');
 const items = galleryHolder.find('.item-holder');
 
+const currentCountHolder = $('#current-count');
+const arrowsHolder = $('#arrows-holder');
+
 const transition = getPrefixed('transition');
 const transform = getPrefixed('transform');
+
+const KEYUP_CODE = 38;
+const KEYDOWN_CODE = 40;
 
 class HeroGallery{
 
     constructor(){
+        this.isEnabled = false;
         this.isDragging = false;
 
         this.threshold = 150;
@@ -21,19 +28,21 @@ class HeroGallery{
         this.direction = '';
 
         this.count = items.length;
-        this.current = 1;
+        this.current = 0;
 
         this.setDimension();
-        this.setPosition();
-        this.switchSlide();
 
-        this._events();
+        this._UIevents();
     }
 
-    _events(){
+    _UIevents(){
         galleryHolder.on('mousedown', (e) => this.dragStart(e))
                      .on('mousemove', (e) => this.dragMove(e))
                      .on('mouseup mouseleave', (e) => this.dragEnd(e));
+        
+        arrowsHolder.on('click', '.arrow', (e) => this.handleArrow(e));        
+
+        $(document).on('keydown', (e) => this.handleKey(e));
 
         $(window).on('resize', (e) => this.resize(e));
     }
@@ -50,15 +59,19 @@ class HeroGallery{
     }
 
     dragStart(e){
+        if(!this.isEnabled) return;
+
         this.isDragging = true;
 
         this.coords.sy = e.pageY;
+
+        galleryHolder.addClass('__drag-start');
 
         return false;
     }
 
     dragMove(e){
-        if(!this.isDragging) return;
+        if(!this.isDragging || !this.isEnabled) return;
 
         this.coords.dy = e.pageY - this.coords.sy;
 
@@ -75,17 +88,73 @@ class HeroGallery{
     }
 
     dragEnd(e){
-        if(!this.isDragging) return;
+        if(!this.isDragging || !this.isEnabled) return;
 
         this.isDragging = false;
 
-        this.updateCurrent();        
+        if(this.checkThreshold()){
+
+            this.updateCurrent();
+        }
 
         this.updateBoundaries();
 
         this.setPosition();
 
         this.switchSlide(true);
+
+        this.updateActiveClass();
+
+        this.updateCounter();
+
+        galleryHolder.removeClass('__drag-start');
+
+        return false;
+    }
+
+    handleArrow(e){
+        if(!this.isEnabled) return;
+
+        let target = $(e.currentTarget);
+
+        this.direction = target.hasClass('arrow-bottom') ? 'bottom' : 'top';
+
+        this.updateCurrent();
+
+        this.updateBoundaries();
+
+        this.setPosition();
+
+        this.switchSlide(true);
+
+        this.updateActiveClass();
+
+        this.updateCounter();
+
+        return false; 
+    }
+
+    handleKey(e){
+        if(!this.isEnabled) return;
+
+        if(e.which !== KEYUP_CODE && e.which !== KEYDOWN_CODE) return;
+
+        let keyCode = e.which;
+
+        if(keyCode === KEYUP_CODE) this.direction = 'top';
+        if(keyCode === KEYDOWN_CODE) this.direction = 'bottom';
+
+        this.updateCurrent();
+
+        this.updateBoundaries();
+
+        this.setPosition();
+
+        this.switchSlide(true);
+
+        this.updateActiveClass();
+
+        this.updateCounter();
 
         return false;
     }
@@ -94,14 +163,18 @@ class HeroGallery{
 
         this.setDimension();
         this.setPosition();
-        this.switchSlide(true);
+        this.switchSlide();
 
         return false;
     }
 
+    checkThreshold(){
+        return (Math.abs(this.coords.dy) >= this.threshold) ? true : false;
+    }
+
     updateCurrent(){
-        if((this.direction === 'bottom') && (Math.abs(this.coords.dy) >= this.threshold)) this.current++;
-        if((this.direction === 'top') && (Math.abs(this.coords.dy) >= this.threshold)) this.current--;
+        if(this.direction === 'bottom') this.current++;
+        if(this.direction === 'top') this.current--;
     }
 
     updateBoundaries(){
@@ -114,8 +187,14 @@ class HeroGallery{
             transition: hasTransition ? 'all .4s ease-in-out 0s' : 'none',
             transform: 'translateY('+ this.positionY +'px)'
         });
+    }
 
+    updateActiveClass(){
         items.removeClass('active').eq(this.current).addClass('active');
+    }
+
+    updateCounter(){
+        currentCountHolder.html(this.current + 1);
     }
 
 }

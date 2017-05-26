@@ -1,11 +1,5 @@
 import $ from '@config/jquery';
 
-import Menu from '@components/menu';
-import Hold from '@components/hold';
-import HeroGallery from '@components/heroGallery';
+import HomeContainer from '@containers/homeContainer';
 
-$(() => {
-    new Menu();
-    new Hold();
-    new HeroGallery();
-});
+$(() => new HomeContainer());

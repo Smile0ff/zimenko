@@ -79,73 +79,39 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .container.intro-holder{
     opacity: 1;
-    background: @white;
+    background: transparent;
     transition: all .4s @easing 0s;
     visibility: visible;
     .hero-title-holder{
         width: 100%;
         height: 100%;
         position: relative;
+        z-index: 5;
         user-select: none;
+        background: transparent;
         overflow: hidden;
-        & > .svg-holder{
+        .hero-mask{
             width: 100%;
             height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 5;
-            overflow: hidden;
-            .hero-mask{
-                width: 100%;
-                height: 100%;
-                .mask-rect{
-                    stroke: none;
-                    fill: @white;
-                }
-                .mask-text{
-                    font-family: "Elianto";
-                    font-size: 11.25em;
-                    font-size: 9.375vw;
-                    fill: @white;
-                    stroke: @gray;
-                    stroke-width: 1px;
-                    stroke-dasharray: 750;
-                    stroke-dashoffset: 750;
-                    text-transform: uppercase;
-                    animation: hero-title 2.4s @easing 0s 1 forwards;
-                }
-                .rect{
-                    fill: @white;
-                    stroke: none;
-                }
+            .mask-rect{
+                stroke: none;
+                fill: @white;
             }
-        }
-        & > .hero-photo{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 120px 11.19791666666667%;
-            box-sizing: border-box;
-            overflow: hidden;
-            figure{
-                display: block;
-                width: 100%;
-                height: 100%;
-                position: relative;
-                overflow: hidden;
-                img{
-                    display: block;
-                    width: auto;
-                    height: 100%;
-                    position: absolute;
-                    top: 0;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    overflow: hidden;
-                }
+            .mask-text{
+                font-family: "Elianto";
+                font-size: 11.25em;
+                font-size: 9.375vw;
+                fill: @white;
+                stroke: @gray;
+                stroke-width: 1px;
+                stroke-dasharray: 750;
+                stroke-dashoffset: 750;
+                text-transform: uppercase;
+                animation: hero-title 2.4s @easing 0s 1 forwards;
+            }
+            .rect{
+                fill: @white;
+                stroke: none;
             }
         }
     }
@@ -298,6 +264,64 @@
         visibility: hidden;
         overflow: hidden;
     }
+    .counter-holder{
+        display: block;
+        width: 60px;
+        height: auto;
+        position: absolute;
+        top: 60px;
+        right: 60px;
+        z-index: 10;
+        opacity: 0;
+        background: transparent;
+        transition: all .4s @easing 0s;
+        visibility: hidden;
+        overflow: hidden;
+        .count{
+            display: block;
+            width: 100%;
+            height: auto;
+            font-size: 3.75em;
+            font-weight: 500;
+            color: @gray;
+            text-align: center;
+            overflow: hidden;
+            &.current{ color: @gold; }
+        }
+        .line{
+            display: block;
+            width: 1px;
+            height: 30px;
+            margin: 15px auto;
+            background: @gray;
+            overflow: hidden;
+        }
+    }
+    .arrows-holder{
+        display: inline-block;
+        position: absolute;
+        right: 60px;
+        bottom: 60px;
+        z-index: 10;
+        opacity: 0;
+        transition: all .4s @easing 0s;
+        visibility: hidden;
+        user-select: none;
+        overflow: hidden;
+        .arrow{
+            display: inline-block;
+            vertical-align: middle;
+            height: 60px;
+            font-size: 3.75em;
+            color: @black;
+            cursor: pointer;
+            transition: all .2s @easing 0s;
+            overflow: hidden;
+            &.arrow-bottom{ margin-right: -30px; }
+            &:before{ vertical-align: top; }
+            &:hover{ color: @gold; }
+        }
+    }
 }
 
 #hero-gallery{
@@ -312,7 +336,7 @@
     &:active{
         cursor: grabbing;
     }
-    & > ul.list-holder{
+    & > .list-holder{
         display: block;
         width: 100%;
         height: 100%;
@@ -322,14 +346,14 @@
         left: 0;
         padding: 120px 10.9375%;
         box-sizing: border-box;
-        li.item-holder,
-        li.item-holder figure{
+        .item-holder,
+        .item-holder figure{
             display: block;
             width: 100%;
             height: 100%;
             overflow: hidden;
         }
-        li.item-holder{
+        .item-holder{
             transition: all .4s @easing 0s;
             transform: scale(.85);
             figure{
@@ -353,6 +377,11 @@
             }
         }
     }
+    &.__drag-start .list-holder .item-holder{
+        transition: all .2s @easing 0s;
+        transform: scale(.85);
+        figure img{ filter: grayscale(100%); }
+    }
 }
 
 #page.__hold-active .gallery-holder{
@@ -363,7 +392,9 @@
     }
     .hold-close,
     .link-holder,
-    .tooltip{
+    .tooltip,
+    .counter-holder,
+    .arrows-holder{
         opacity: 1;
         visibility: visible;
         transition: all .2s @easing .4s;
