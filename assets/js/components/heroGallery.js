@@ -18,6 +18,7 @@ class HeroGallery{
     constructor(){
         this.isEnabled = false;
         this.isDragging = false;
+        this.isAnimated = false;
 
         this.threshold = 150;
 
@@ -44,7 +45,9 @@ class HeroGallery{
 
         $(document).on('keydown', (e) => this.handleKey(e));
 
-        $(window).on('resize', (e) => this.resize(e));
+        $(window)
+            .on('wheel', (e) => this.handleScroll(e))
+            .on('resize', (e) => this.resize(e));
     }
 
     setDimension(){
@@ -59,7 +62,7 @@ class HeroGallery{
     }
 
     dragStart(e){
-        if(!this.isEnabled) return;
+        if(!this.isEnabled || this.isAnimated) return;
 
         this.isDragging = true;
 
@@ -113,7 +116,7 @@ class HeroGallery{
     }
 
     handleArrow(e){
-        if(!this.isEnabled) return;
+        if(!this.isEnabled || this.isAnimated) return;
 
         let target = $(e.currentTarget);
 
@@ -135,7 +138,7 @@ class HeroGallery{
     }
 
     handleKey(e){
-        if(!this.isEnabled) return;
+        if(!this.isEnabled || this.isAnimated) return;
 
         if(e.which !== KEYUP_CODE && e.which !== KEYDOWN_CODE) return;
 
@@ -149,6 +152,32 @@ class HeroGallery{
         this.updateBoundaries();
 
         this.setPosition();
+
+        this.toggleAnimation();
+
+        this.switchSlide(true);
+
+        this.updateActiveClass();
+
+        this.updateCounter();
+
+        return false;
+    }
+
+    handleScroll(e){
+        if(!this.isEnabled || this.isAnimated) return;
+
+        let wheelDelta = e.originalEvent.wheelDelta;
+
+        this.direction = wheelDelta > 0 ? 'top' : 'bottom';
+
+        this.updateCurrent();
+
+        this.updateBoundaries();
+
+        this.setPosition();
+
+        this.toggleAnimation();
 
         this.switchSlide(true);
 
@@ -180,6 +209,17 @@ class HeroGallery{
     updateBoundaries(){
         if(this.current <= 0) this.current = 0;
         if(this.current >= this.count - 1) this.current = this.count - 1;
+    }
+
+    toggleAnimation(){
+        this.isAnimated = true;
+
+        let timer = setTimeout(() => {
+            
+            this.isAnimated = false;
+            clearTimeout(timer);
+
+        }, 400);
     }
 
     switchSlide(hasTransition = false){

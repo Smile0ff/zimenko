@@ -21,6 +21,155 @@ body,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  loader start                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#loader-holder{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    opacity: 1;
+    background: @white;
+    transition: all .4s @easing 1.6s;
+    visibility: visible;
+    overflow: hidden;
+    &:before,
+    &:after{
+        display: block;
+        width: 100%;
+        height: 6px;
+        position: absolute;
+        z-index: 5;
+        content: "";
+        overflow: hidden;
+    }
+    &:before{
+        top: 0;
+        left: 0;
+        background: @gold;
+        transition: all 1.6s @easing 0s;
+        transform-origin: 0% 0%;
+        transform: scaleX(0);
+    }
+    &:after{
+        left: 0;
+        bottom: 0;
+        background: @black;
+        transition: all 1.6s @easing 0s;
+        transform-origin: 100% 0%;
+        transform: scaleX(0);
+    }
+    & > .title-holder{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        svg{
+            width: 100%;
+            height: 100%;
+            & > .title-text{
+                font-family: 'Elianto';
+                font-size: 11.25em;
+                font-size: 9.375vw;
+                fill: @white;
+                stroke: @gray;
+                stroke-width: 1px;
+                stroke-dasharray: 750;
+                stroke-dashoffset: 750;
+                text-transform: uppercase;
+            }
+        }
+    }
+    & > .loader{
+        width: 240px;
+        height: 6px;
+        position: absolute;
+        left: 50%;
+        bottom: 126px;
+        z-index: 5;
+        margin-left: -120px;
+        border-radius: 3px;
+        background: @gray;
+        opacity: 1;
+        transition: all .2s @easing 0s;
+        visibility: visible;
+        overflow: hidden;
+        & > .loading{
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: @gold;
+            animation: loading 1.6s @easing 0s infinite;
+            overflow: hidden;
+        }
+    }
+    &.__loaded{
+        opacity: 0;
+        visibility: hidden;
+        &:before,
+        &:after{
+            transform: scaleX(1);
+        }
+        & > .title-holder svg{
+            & > .title-text{ animation: loading-text 1.6s @easing 0s 1 forwards; }
+        }
+        & > .loader{
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+}
+
+@keyframes loading{
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes loading-text{
+    0% { stroke-dashoffset: 750; }
+    100% { stroke-dashoffset: 0; }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  loader end                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  logo start                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#logo-holder{
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+    & > a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        overflow: hidden;
+        & > .logo{
+            .circle{
+                fill: none;
+                stroke-width: 2px;
+                stroke: @black;
+            }
+            .letters{
+                stroke: none;
+                fill: @black;
+            }
+        }
+    }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  logo end                                  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  header start  			                  */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #header{
@@ -30,6 +179,9 @@ body,
     top: 0;
     left: 0;
     z-index: 15;
+    opacity: 1;
+    transition: all .4s @easing 0s;
+    visibility: visible;
     overflow: hidden;
     &:before{
         display: block;
@@ -45,28 +197,15 @@ body,
         transform: scaleX(1);
         overflow: hidden;
     }
-    .logo-holder{
-        width: 90px;
-        height: 90px;
+    #logo-holder{
         float: left;
         margin: 60px 0 0 60px;
-        overflow: hidden;
         & > a{
-            display: block;
-            width: 100%;
-            height: 100%;
-            outline: none;
-            overflow: hidden;
             & > .logo{
                 .circle{
-                    fill: none;
-                    stroke-width: 2px;
-                    stroke: @black;
                     transition: all .2s @easing 0s;
                 }
                 .letters{
-                    stroke: none;
-                    fill: @black;
                     transition: all .2s @easing 0s;
                 }
             }
@@ -175,9 +314,6 @@ body,
         display: inline-block;
         float: right;
         margin: 60px 60px 0 0;
-        opacity: 1;
-        visibility: visible;
-        transition: all .4s @easing 0s;
         overflow: hidden;
         ul{
             display: inline-block;
@@ -203,7 +339,7 @@ body,
 
 #page.__menu-active #header{
     &:before{ transform: scaleX(0); }
-    .logo-holder{
+    #logo-holder{
         & > a .logo{
             .circle{ stroke: @white; }
             .letters{ fill: @white; }
@@ -232,15 +368,12 @@ body,
 
 #page.__hold-start #header,
 #page.__hold-active #header{
+    opacity: 0;
+    transition: all .4s @easing 1.6s;
+    visibility: hidden;
     &:before{
-        transition: all 1.6s @easing 0s;
         transform: scaleX(0);
-    }
-    .open-menu-button,
-    .langs-holder{
-        opacity: 0;
-        visibility: hidden;
-        transition: all .4s @easing 1.6s;
+        transition: all 1.6s @easing 0s;
     }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -281,13 +414,13 @@ body,
             overflow: hidden;
         }
         ul li{
-            & + li{ margin-top: 60px; }
+            & + li{ margin-top: 45px; }
             a{
                 display: inline-block;
                 position: relative;
                 padding-left: 180px;
                 font-size: 1.5em;
-                font-weight: 500;
+                font-weight: 400;
                 color: @white;
                 transition: all .2s @easing 0s;
                 text-transform: uppercase;
@@ -301,6 +434,7 @@ body,
                     left: 0;
                     content: "";
                     background: @white;
+                    backface-visibility: hidden;
                     overflow: hidden;
                 }
                 &:hover{ color: @gold;}
@@ -531,3 +665,26 @@ body,
 /*  progress end                              */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  adaptive start                            */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@media only screen and @tablet{
+    
+    
+
+}
+
+@media only screen and @tabletPortrait{
+    
+    
+
+}
+
+@media only screen and @tabletLandscape{
+    
+    
+
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  adaptive end                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
