@@ -1,5 +1,7 @@
 import { getPrefixed } from '@utility/vendor';
 
+import isMobile from '@utility/isMobile';
+
 const galleryHolder = $('#hero-gallery');
 const list = galleryHolder.find('.list-holder');
 const items = galleryHolder.find('.item-holder');
@@ -10,8 +12,15 @@ const arrowsHolder = $('#arrows-holder');
 const transition = getPrefixed('transition');
 const transform = getPrefixed('transform');
 
+const mousedown = isMobile() ? 'touchstart' : 'mousedown';
+const mousemove = isMobile() ? 'touchmove': 'mousemove';
+const mouseup = isMobile() ? 'touchend' : 'mouseup';
+const mouseleave = isMobile() ? 'touchleave': 'mouseleave';
+
 const KEYUP_CODE = 38;
 const KEYDOWN_CODE = 40;
+
+const ANIMATION_TIME = 400;
 
 class HeroGallery{
 
@@ -20,7 +29,7 @@ class HeroGallery{
         this.isDragging = false;
         this.isAnimated = false;
 
-        this.threshold = 150;
+        this.threshold = isMobile() ? 50 : 150;
 
         this.coords = {};
         this.dimension = {};
@@ -37,16 +46,17 @@ class HeroGallery{
     }
 
     _UIevents(){
-        galleryHolder.on('mousedown', (e) => this.dragStart(e))
-                     .on('mousemove', (e) => this.dragMove(e))
-                     .on('mouseup mouseleave', (e) => this.dragEnd(e));
+        galleryHolder.on(mousedown, (e) => this.dragStart(e))
+                     .on(mousemove, (e) => this.dragMove(e))
+                     .on(mouseup, (e) => this.dragEnd(e))
+                     .on(mouseleave, (e) => this.dragEnd(e));
         
         arrowsHolder.on('click', '.arrow', (e) => this.handleArrow(e));        
 
         $(document).on('keydown', (e) => this.handleKey(e));
 
         $(window)
-            .on('wheel', (e) => this.handleScroll(e))
+            .on('mousewheel DOMMouseScroll', (e) => this.handleScroll(e))
             .on('resize', (e) => this.resize(e));
     }
 
@@ -66,17 +76,26 @@ class HeroGallery{
 
         this.isDragging = true;
 
-        this.coords.sy = e.pageY;
+        let event = e.originalEvent,
+            pageY = event.changedTouches ? event.changedTouches[0].pageY : event.pageY;
 
-        galleryHolder.addClass('__drag-start');
+        this.coords.sy = pageY;
+
+        if(!isMobile())
+            galleryHolder.addClass('__drag-start');
 
         return false;
     }
 
     dragMove(e){
+        e.preventDefault();
+
         if(!this.isDragging || !this.isEnabled) return;
 
-        this.coords.dy = e.pageY - this.coords.sy;
+        let event = e.originalEvent,
+            pageY = event.changedTouches ? event.changedTouches[0].pageY : event.pageY;
+
+        this.coords.dy = pageY - this.coords.sy;
 
         this.direction = (this.coords.dy <= 0) ? 'bottom' : 'top';
 
@@ -106,11 +125,8 @@ class HeroGallery{
 
         this.switchSlide(true);
 
-        this.updateActiveClass();
-
-        this.updateCounter();
-
-        galleryHolder.removeClass('__drag-start');
+        if(!isMobile())
+            galleryHolder.removeClass('__drag-start');
 
         return false;
     }
@@ -129,10 +145,6 @@ class HeroGallery{
         this.setPosition();
 
         this.switchSlide(true);
-
-        this.updateActiveClass();
-
-        this.updateCounter();
 
         return false; 
     }
@@ -153,13 +165,7 @@ class HeroGallery{
 
         this.setPosition();
 
-        this.toggleAnimation();
-
         this.switchSlide(true);
-
-        this.updateActiveClass();
-
-        this.updateCounter();
 
         return false;
     }
@@ -167,9 +173,9 @@ class HeroGallery{
     handleScroll(e){
         if(!this.isEnabled || this.isAnimated) return;
 
-        let wheelDelta = e.originalEvent.wheelDelta;
+        let delta = e.originalEvent.wheelDelta || e.originalEvent.detail * -1;
 
-        this.direction = wheelDelta > 0 ? 'top' : 'bottom';
+        this.direction = delta > 0 ? 'top' : 'bottom';
 
         this.updateCurrent();
 
@@ -177,13 +183,7 @@ class HeroGallery{
 
         this.setPosition();
 
-        this.toggleAnimation();
-
         this.switchSlide(true);
-
-        this.updateActiveClass();
-
-        this.updateCounter();
 
         return false;
     }
@@ -211,22 +211,24 @@ class HeroGallery{
         if(this.current >= this.count - 1) this.current = this.count - 1;
     }
 
-    toggleAnimation(){
-        this.isAnimated = true;
-
-        let timer = setTimeout(() => {
-            
-            this.isAnimated = false;
-            clearTimeout(timer);
-
-        }, 400);
-    }
-
     switchSlide(hasTransition = false){
+        this.toggleAnimation();
+
         list.css({
             transition: hasTransition ? 'all .4s ease-in-out 0s' : 'none',
             transform: 'translateY('+ this.positionY +'px)'
         });
+
+        this.updateActiveClass();
+        this.updateCounter();
+
+        let timer = setTimeout(() => {
+            
+            this.toggleAnimation();
+
+            clearTimeout(timer);
+
+        }, ANIMATION_TIME);
     }
 
     updateActiveClass(){
@@ -235,6 +237,10 @@ class HeroGallery{
 
     updateCounter(){
         currentCountHolder.html(this.current + 1);
+    }
+
+    toggleAnimation(){
+        this.isAnimated = !this.isAnimated;
     }
 
 }

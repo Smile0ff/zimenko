@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="HandheldFriendly" content="True">
 	<meta name="MobileOptimized" content="320">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="format-detection" content="address=no">
 	<meta name="mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
 	<link rel="icon" type="image/png" href="assets/images/favicons/192x192.png"-->
 	<link rel="stylesheet" href="build/css/home.bundle.min.css">
 </head>
-<body>
+<body class="preload">
 	<div id="page">
 		<header id="header">
 			<div id="logo-holder">
@@ -199,7 +199,7 @@
 						<defs>
 							<mask id="mask" x="0" y="0" width="100%" height="100%">
 								<rect class="mask-rect" x="0" y="0" width="100%" height="100%" />
-								<text id="mask-text" class="mask-text" text-anchor="middle" alignment-baseline="middle" x="50%" y="50%" dy="10">Zimenko</text>
+								<text id="mask-text" class="mask-text" text-anchor="middle" dominant-baseline="middle" x="50%" y="50%" dy="10">Zimenko</text>
 							</mask>
 						</defs>
 						<rect class="rect" x="0" y="0" width="100%" height="100%" mask="url(#mask)" />
@@ -335,7 +335,7 @@
 		<div id="loader-holder">
 			<div class="title-holder svg-holder">
 				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-					<text class="title-text" text-anchor="middle" alignment-baseline="middle" x="50%" y="50%" dy="10">Zimenko</text>
+					<text class="title-text" text-anchor="middle" dominant-baseline="middle" x="50%" y="50%" dy="10">Zimenko</text>
 				</svg>
 			</div>
 			<div class="loader">

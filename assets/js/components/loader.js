@@ -1,4 +1,6 @@
 const LOAD_TIME = 2000;
+
+const body = $('body');
 const loaderHolder = $('#loader-holder');
 
 class Loader{
@@ -12,6 +14,8 @@ class Loader{
     }
 
     loaded(e){
+
+        body.removeClass('preload');
 
         let timer = setTimeout(() => {
 

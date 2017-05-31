@@ -1,10 +1,16 @@
 import bindEmitter from '@decorators/bindEmitter';
 
+import isMobile from '@utility/isMobile';
+
 import * as homeConstants from '@constants/homeConstants';
 
 const HOLD_TIME = 2000;
 
 const page = $('#page');
+
+const mousedown = isMobile() ? 'touchstart': 'mousedown';
+const mouseup = isMobile() ? 'touchend' : 'mouseup';
+const mouseleave = isMobile() ?  'touchleave' : 'mouseleave';
 
 @bindEmitter
 class Hold{
@@ -18,8 +24,9 @@ class Hold{
     }
 
     _UIevents(){
-        page.on('mousedown', '.intro-holder', (e) => this.start(e))
-            .on('mouseup mouseleave', '.intro-holder', (e) => this.end(e))
+        page.on(mousedown, '.intro-holder', (e) => this.start(e))
+            .on(mouseup, '.intro-holder', (e) => this.end(e))
+            .on(mouseleave, '.intro-holder', (e) => this.end(e))
             .on('click', '.hold-close', (e) => this.close(e));
     }
 
