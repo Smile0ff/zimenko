@@ -1,8 +1,11 @@
 import $ from '@config/jquery';
 
-import Loader from '@components/loader';
+import startLoader from '@components/loader/';
 import HomeContainer from '@containers/homeContainer';
 
-new Loader();
+startLoader({
+    el: '#loader-holder',
+    time: 2000
+});
 
 $(() => new HomeContainer());

@@ -476,7 +476,102 @@
 
 }
 
-@media only screen and @smartphone{
+@media only screen and @phoneLandscape{
+    
+    #hold-progress-holder{
+        height: 14px;
+        top: auto;
+        left: 50%;
+        bottom: 60px;
+        transform: rotate(0deg) translateX(-50%);
+        .circle{
+            width: 8px;
+            height: 8px;
+            top: 0;
+            border-radius: 4px;
+            margin-top: 3px;
+            transform: translateY(0);
+        }
+        .text{
+            vertical-align: top;
+            padding: 0 15px;
+            font-size: .75em;
+            line-height: 14px;
+        }
+    }
+
+    .container.intro-holder{
+        .hero-title-holder .hero-mask .mask-text{ font-size: 5em; }
+        .postscript-holder{ display: none; }
+    }
+    
+
+    .container.gallery-holder{
+        #logo-holder{
+            top: 30px;
+            left: 30px;
+        }
+        .top-line,
+        .bottom-line{
+            height: 60px;
+        }
+        .hold-close{
+            width: 42px;
+            height: 42px;
+            top: auto;
+            left: 30px;
+            bottom: 30px;
+            margin-top: 0;
+            & > .icon{
+                width: 14px;
+                height: 14px;
+                font-size: .875em;
+                margin: -7px 0 0 -7px;
+            }
+        }
+        .link-holder{
+            top: auto;
+            right: 30px;
+            bottom: 30px;
+            transform: rotate(0deg) translateX(0);
+            & > .line{ display: none; }
+            .text{
+                font-size: .75em;
+                transition: none;
+            }
+            &:hover .text{ color: @black; }
+        }
+        .tooltip{ display: none; }
+        .counter-holder{
+            display: inline-block;
+            width: auto;
+            height: auto;
+            top: 30px;
+            right: 30px;
+            .count{
+                display: inline-block;
+                vertical-align: middle;
+                width: auto;
+                height: auto;
+                font-size: 1.5em;
+            }
+            .line{
+                display: inline-block;
+                vertical-align: middle;
+                width: 30px;
+                height: 1px;
+                margin: 0 15px;
+            }
+        }
+        .arrows-holder{
+            display: none;
+        }
+    }
+
+
+}
+
+@media only screen and @phonePortrait{
 
     #hold-progress-holder{
         height: 14px;

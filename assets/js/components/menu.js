@@ -1,21 +1,26 @@
-import bindEmitter from '@decorators/bindEmitter';
+import { EventEmitter } from 'events';
+
+import isMobile from '@utility/isMobile';
 
 import * as homeConstants from '@constants/homeConstants';
 
 const page = $('#page');
 
-@bindEmitter
-class Menu{
+const click = isMobile() ? 'touchstart': 'click';
+
+class Menu extends EventEmitter{
 
     constructor(){
+        super();
+        
         this.isActive = false;
         
         this._UIevents();
     }
 
     _UIevents(){
-        page.on('click', '.open-menu-button', (e) => this.open(e))
-            .on('click', '.close-menu-button', (e) => this.close(e));
+        page.on(click, '.open-menu-button', (e) => this.open(e))
+            .on(click, '.close-menu-button', (e) => this.close(e));
     }
 
     open(e){

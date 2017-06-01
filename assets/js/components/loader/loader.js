@@ -1,11 +1,14 @@
-const LOAD_TIME = 2000;
-
 const body = $('body');
-const loaderHolder = $('#loader-holder');
 
 class Loader{
 
-    constructor(){
+    constructor(options){
+        if(!options.el)
+            throw new Error('Loader requires el to be set');
+
+        this.el = $(options.el);
+        this.time = options.time;
+
         this._UIevents();       
     }
 
@@ -14,15 +17,14 @@ class Loader{
     }
 
     loaded(e){
-
         body.removeClass('preload');
 
         let timer = setTimeout(() => {
 
-            loaderHolder.addClass('__loaded');
+            this.el.addClass('__loaded');
             clearTimeout(timer);
 
-        }, LOAD_TIME);
+        }, this.time);
 
         return false;
     }

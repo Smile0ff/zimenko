@@ -1,4 +1,4 @@
-import bindEmitter from '@decorators/bindEmitter';
+import { EventEmitter } from 'events';
 
 import isMobile from '@utility/isMobile';
 
@@ -11,11 +11,13 @@ const page = $('#page');
 const mousedown = isMobile() ? 'touchstart': 'mousedown';
 const mouseup = isMobile() ? 'touchend' : 'mouseup';
 const mouseleave = isMobile() ?  'touchleave' : 'mouseleave';
+const click = isMobile() ? 'touchstart' : 'click';
 
-@bindEmitter
-class Hold{
+class Hold extends EventEmitter{
 
     constructor(){
+        super();
+
         this.isHold = false;
         this.isActive = false;
         this.timer = null;
@@ -27,7 +29,7 @@ class Hold{
         page.on(mousedown, '.intro-holder', (e) => this.start(e))
             .on(mouseup, '.intro-holder', (e) => this.end(e))
             .on(mouseleave, '.intro-holder', (e) => this.end(e))
-            .on('click', '.hold-close', (e) => this.close(e));
+            .on(click, '.hold-close', (e) => this.close(e));
     }
 
     start(e){
