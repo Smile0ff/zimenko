@@ -8,8 +8,6 @@ body,
 #content{
     overflow: visible;
 }
-
-#common-loader-holder{ display: none; }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  layout end                                */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -90,7 +88,122 @@ body,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 @media only screen and @tablet{
 
-    
+    .about-holder{
+        height: auto;
+        .photo-holder{
+            width: 100%;
+            height: auto;
+            position: static;
+            padding: 240px 150px 60px 60px;
+            figure{
+                height: auto;
+                img{
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    max-width: 100%;
+                    max-height: auto;
+                }
+            }
+        }
+        .inner{
+            width: 100%;
+            height: auto;
+            position: static;
+            padding: 0px 150px 120px 60px;
+            margin-left: 0%;
+            .info-holder{
+                h1{ font-size: 1.875em; }
+                p{
+                    font-size: .875em;
+                    margin-top: 30px;
+                }
+            }
+        }
+        .btn-contact{
+            a{
+                .text{ font-size: .875em; }
+                &:hover{
+                    &:before{ transform: translateX(-100%); }
+                    .text{ color: @black; }
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and @tabletLandscape{
+
+    .about-holder{
+        .photo-holder{
+            width: 50%;
+            float: left;
+            padding: 240px 60px 60px;
+        }
+        .inner{
+            width: 50%;
+            float: left;
+            padding: 350px 150px 60px 0;
+        }
+    }
+}
+
+@media only screen and @phonePortrait{
+
+    .about-holder{
+        overflow: hidden;
+        .photo-holder{
+            width: 100%;
+            height: auto;
+            padding: 150px 30px 30px;
+        }
+        .inner{
+            width: 100%;
+            height: auto;
+            padding: 0px 30px;
+            .info-holder{
+                h1{ font-size: 1.875em; }
+                p{ margin-top: 15px; }
+            }
+        }
+        .btn-contact{
+            position: static;
+            top: auto;
+            right: auto;
+            margin: 30px 30px 60px;
+            transform: rotate(0deg) translateX(0);
+        }
+    }
+
+}
+
+@media only screen and @phoneLandscape{
+
+    .about-holder{
+        overflow: hidden;
+        .photo-holder{
+            width: 50%;
+            float: left;
+            padding: 120px 0 0 30px;
+        }
+        .inner{
+            width: 50%;
+            float: left;
+            padding: 180px 30px 30px;
+            margin-left: 0%;
+            .info-holder{
+                p{ margin-top: 15px; }
+            }
+        }
+        .btn-contact{
+            position: static;
+            top: auto;
+            right: auto;
+            margin: 30px 0 60px 50%;
+            transform: rotate(0deg) translateX(30px);
+        }
+    }
 
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
