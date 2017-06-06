@@ -1,4 +1,5 @@
 @import '../components/common.less';
+@import '../components/navigation.less';
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  layout start                              */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -15,24 +16,57 @@
 .blog-holder{
     width: 100%;
     height: 100%;
+    position: relative;
     overflow: hidden;
     .inner{
         width: 100%;
         height: 100%;
+        position: relative;
         overflow: hidden;
+        & > .blog{
+            display: flex;
+            width: 500%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex-flow: row nowrap;
+            overflow: hidden;
+            .article-holder{
+                width: 100%;
+                height: 100%;
+                position: relative;
+                flex: 0 1 100%;
+                overflow: hidden;
+            }
+        }
     }
+    & > .tooltip-holder{
+        display: inline-block;
+        position: absolute;
+        right: 60px;
+        bottom: 45px;
+        z-index: 5;
+        overflow: hidden;
+        .text{
+            display: inline-block;
+            vertical-align: middle;
+            color: @black;
+            font-size: .875em;
+            text-transform: lowercase;
+        }
+        .icon{
+            display: inline-block;
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            font-size: 1.5em;
+            color: @black;
+            margin-left: 15px;
+        }
+    }
+
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  blog end                                  */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*  progress start                            */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-#progress-holder{
-    background: @gray;
-    .progress-line{ background: @black; }
-}
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*  progress end                              */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
