@@ -29,17 +29,22 @@
     transform: translateY(114px);
     background: @gray;
     overflow: hidden;
-    &:before{
+    .scroll-progress,
+    .menu-underline{
         display: block;
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         left: 0;
-        content: "";
-        background: @gold;
+        background: @black;
         transform: translateX(-100%);
         overflow: hidden;
+    }
+    .menu-underline{
+        z-index: 10;
+        background: @gold;
+        transition: all .4s @easing 0s;
     }
     & > .navigation{
         width: 100%;
@@ -47,6 +52,7 @@
         position: absolute;
         top: 50%;
         left: 0;
+        z-index: 5;
         padding: 0 60px;
         box-sizing: border-box;
         transform: translateY(-50%);
@@ -61,7 +67,7 @@
                 width: 24px;
                 height: 24px;
                 font-size: 1.5em;
-                color: @black;
+                color: @white;
                 transition: all .4s @easing 0s;
                 line-height: 24px;
             }
@@ -69,7 +75,7 @@
                 display: inline-block;
                 vertical-align: middle;
                 font-size: .875em;
-                color: @black;
+                color: @white;
                 transition: all .4s @easing 0s;
             }
             &.prev{
@@ -80,16 +86,9 @@
                 float: right;
                 .text{ margin-right: 5px; }
             }
-            &:hover{
-                .icon,
-                .text{
-                    color: @white;
-                }
-            }
         }
         & > ul{
             display: inline-block;
-            vertical-align: middle;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -104,14 +103,13 @@
                     width: 15px;
                     height: 15px;
                     border-radius: 50%;
-                    background: @black;
+                    background: @white;
                     transition: all .4s @easing 0s;
                     transform: scale(.5);
                     overflow: hidden;
                 }
                 & > a:hover,
                 &.active a{
-                    background: @white;
                     transform: scale(1);
                 }
             }
@@ -119,6 +117,12 @@
     }
     &:hover{
         transform: translateY(0);
+    }
+}
+
+#page.__menu-active #navigation-holder{
+    .menu-underline{
+        transform: translateX(0%);
     }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

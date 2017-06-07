@@ -1,11 +1,15 @@
 import Menu from '@components/menu';
-import Gallery from '@components/gallery';
+import Scroller from '@components/scroller';
+
+import isMobile from '@utility/isMobile';
 
 class BlogContainer{
 
     constructor(){
         this.menu = new Menu();
-        this.gallery = new Gallery();
+
+        if(!isMobile())
+            this.scroller = new Scroller();
     }
 
 }
