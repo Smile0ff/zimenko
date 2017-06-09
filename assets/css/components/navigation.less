@@ -128,3 +128,81 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  navigation end                            */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  adaptive start                            */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@media only screen and @tablet{
+
+    #navigation-link{ display: none; }
+
+    #navigation-holder{
+        width: 100%;
+        height: auto;
+        position: static;
+        transition: none;
+        transform: translateY(0);
+        background: transparent;
+        .scroll-progress,
+        .menu-underline{
+            display: none;
+        }
+        & > .navigation{
+            width: 100%;
+            height: auto;
+            position: relative;
+            top: 0;
+            left: 0;
+            margin: 90px 0 150px;
+            padding: 0 60px;
+            box-sizing: border-box;
+            transform: translateY(0);
+            & > .link{
+                display: inline-block;
+                height: 40px;
+                margin-top: 0;
+                border-radius: 20px;
+                text-align: center;
+                padding: 0 15px;
+                line-height: 40px;
+                background: @gray;
+                overflow: hidden;
+                & > .icon,
+                & > .text{
+                    color: @black;
+                    transition: none;
+                }
+            }
+            & > ul{ display: none; }
+        }
+    }
+
+}
+
+@media only screen and @phoneLandscape{
+
+    #navigation-holder > .navigation{
+        margin: 60px 0;
+        padding: 0 30px;
+    }
+
+}
+
+@media only screen and @phonePortrait{
+
+    #navigation-holder > .navigation{
+        margin: 30px 0 60px;
+        padding: 0 30px;
+        & > .link{
+            margin-top: 0;
+            padding: 0;
+            background: transparent;
+            & > .icon{ font-size: 1.5em; }
+            & > .text{ color: @black; }
+        }
+    }
+
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  adaptive end                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

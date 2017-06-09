@@ -10,6 +10,7 @@ class BlogContainer{
 
         if(!isMobile())
             this.scroller = new Scroller();
+        
     }
 
 }

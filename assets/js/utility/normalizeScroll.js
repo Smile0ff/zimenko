@@ -9,7 +9,7 @@ export function normalizeScroll(event){
         return ((wheelDelta / detail / 40 * detail) > 0) ? 1 : -1;
 
     if(detail)
-        return d / -3;
+        return detail / -3;
 
     return wheelDelta / 120;
 }
