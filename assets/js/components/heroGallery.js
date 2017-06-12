@@ -1,5 +1,5 @@
 import { getPrefixed } from '@utility/vendor';
-
+import { debounce } from '@utility/debounce';
 import isMobile from '@utility/isMobile';
 
 const galleryHolder = $('#hero-gallery');
@@ -75,6 +75,7 @@ class HeroGallery{
         if(!this.isEnabled || this.isAnimated) return;
 
         this.isDragging = true;
+        this.isAnimated = true;
 
         let event = e.originalEvent,
             pageY = event.changedTouches ? event.changedTouches[0].pageY : event.pageY;
@@ -125,6 +126,8 @@ class HeroGallery{
 
         this.switchSlide(true);
 
+        this.clearAnimation();
+
         if(!isMobile())
             galleryHolder.removeClass('__drag-start');
 
@@ -133,6 +136,8 @@ class HeroGallery{
 
     handleArrow(e){
         if(!this.isEnabled || this.isAnimated) return;
+
+        this.isAnimated = true;
 
         let target = $(e.currentTarget);
 
@@ -146,6 +151,8 @@ class HeroGallery{
 
         this.switchSlide(true);
 
+        this.clearAnimation();
+
         return false; 
     }
 
@@ -153,6 +160,8 @@ class HeroGallery{
         if(!this.isEnabled || this.isAnimated) return;
 
         if(e.which !== KEYUP_CODE && e.which !== KEYDOWN_CODE) return;
+
+        this.isAnimated = true;
 
         let keyCode = e.which;
 
@@ -167,23 +176,34 @@ class HeroGallery{
 
         this.switchSlide(true);
 
+        this.clearAnimation();
+
         return false;
     }
 
     handleScroll(e){
-        if(!this.isEnabled || this.isAnimated) return;
 
-        let delta = e.originalEvent.wheelDelta || e.originalEvent.detail * -1;
+        debounce(100, () => {
 
-        this.direction = delta > 0 ? 'top' : 'bottom';
+            if(!this.isEnabled || this.isAnimated) return;
 
-        this.updateCurrent();
+            this.isAnimated = true;
 
-        this.updateBoundaries();
+            let delta = e.originalEvent.wheelDelta || e.originalEvent.detail * -1;
 
-        this.setPosition();
+            this.direction = delta > 0 ? 'top' : 'bottom';
 
-        this.switchSlide(true);
+            this.updateCurrent();
+
+            this.updateBoundaries();
+
+            this.setPosition();
+
+            this.switchSlide(true);
+
+            this.clearAnimation();
+
+        });
 
         return false;
     }
@@ -212,8 +232,6 @@ class HeroGallery{
     }
 
     switchSlide(hasTransition = false){
-        this.toggleAnimation();
-
         list.css({
             transition: hasTransition ? 'all .4s ease-in-out 0s' : 'none',
             transform: 'translateY('+ this.positionY +'px)'
@@ -221,14 +239,6 @@ class HeroGallery{
 
         this.updateActiveClass();
         this.updateCounter();
-
-        let timer = setTimeout(() => {
-            
-            this.toggleAnimation();
-
-            clearTimeout(timer);
-
-        }, ANIMATION_TIME);
     }
 
     updateActiveClass(){
@@ -239,8 +249,11 @@ class HeroGallery{
         currentCountHolder.html(this.current + 1);
     }
 
-    toggleAnimation(){
-        this.isAnimated = !this.isAnimated;
+    clearAnimation(){
+        let timeoutID = setTimeout(() => {
+            this.isAnimated = false;
+            clearTimeout(timeoutID);
+        }, ANIMATION_TIME);
     }
 
 }
