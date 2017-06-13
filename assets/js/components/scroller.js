@@ -6,7 +6,7 @@ import { normalizeScroll } from '@utility/normalizeScroll';
 import { getPrefixed } from '@utility/vendor';
 
 const mouseAccelerator = 40;
-const scrollAccelerator = 120;
+const scrollAccelerator = 40;
 
 const galleryHolder = $('#gallery-holder');
 const galleryList = $('#gallery-list');

@@ -6,7 +6,9 @@ html,
 body,
 #page,
 #content{
-    height: auto;
+    height: 100%;
+    min-height: 100%;
+    overflow: visible;
 }
 #common-loader-holder{ display: none; }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -18,8 +20,36 @@ body,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .article-holder{
     width: 100%;
-    height: auto;
-    overflow: hidden;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    overflow: visible;
+    & > .back-link{
+        display: inline-block;
+        position: absolute;
+        top: 45%;
+        left: 60px;
+        z-index: 10;
+        transform-origin: 0 0;
+        transform: rotate(-90deg) translateX(-100%);
+        overflow: hidden;
+        .line{
+            display: inline-block;
+            vertical-align: middle;
+            width: 60px;
+            height: 1px;
+            margin-right: 15px;
+            position: relative;
+            background: @black;
+            overflow: hidden;
+        }
+        .text{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: .875em;
+            color: @black;
+        }
+    }
     & > .inner{
         width: 100%;
         height: auto;
@@ -27,6 +57,29 @@ body,
         padding: 240px 150px 150px;
         box-sizing: border-box;
         overflow: hidden;
+        .socials-holder{
+            display: flex;
+            width: 100%;
+            height: auto;
+            flex-flow: row wrap;
+            justify-content: flex-end;
+            align-items: flex-start;
+            margin-top: 30px;
+            overflow: hidden;
+            & > time,
+            & > .social-link{
+                flex: 0 1 auto;
+            }
+            & > time{
+                font-size: 1em;
+                color: @black;
+                margin-right: auto;
+            }
+            & > .social-link{
+                
+                & + .social-link{ margin-left: 15px; }
+            }
+        }
     }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
