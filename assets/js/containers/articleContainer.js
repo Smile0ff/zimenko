@@ -1,3 +1,5 @@
+import 'social-likes'
+
 import Menu from '@components/menu';
 
 import isMobile from '@utility/isMobile';
