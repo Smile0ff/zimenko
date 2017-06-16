@@ -3,7 +3,7 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  layout start                              */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-#common-loader-holder{ display: none; }
+#common-loader-holder{ display: block; }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  layout end                                */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -24,7 +24,7 @@
         overflow: hidden;
         & > .blog{
             display: flex;
-            width: 500%;
+            width: 100%;
             height: 100%;
             position: absolute;
             top: 0;
@@ -91,16 +91,27 @@
                                     transform: translateY(-50%);
                                 }
                             }
-                            .number{
+                            .number-holder{
                                 display: inline-block;
+                                vertical-align: top;
                                 position: absolute;
-                                bottom: -8px;
+                                bottom: -6px;
                                 right: 0;
-                                font-family: 'Elianto';
-                                font-size: 11em;
-                                font-size: 9.166666666666667vw;
-                                color: @gold;
                                 transform: translateX(50%) translateY(50%);
+                                .num{
+                                    display: inline-block;
+                                    vertical-align: top;
+                                    position: relative;
+                                    font-family: 'Elianto';
+                                    font-size: 11em;
+                                    font-size: 9.166666666666667vw;
+                                    color: @gold;
+                                    & + .num{
+                                        position: absolute;
+                                        top: 0;
+                                        left: 100%;
+                                    }
+                                }
                             }
                             .more{
                                 display: inline-block;
@@ -248,12 +259,20 @@
                                     transition: none;
                                     filter: grayscale(100%);
                                 }
-                                .number{
+                                .number-holder{
+                                    right: 0;
                                     top: 30px;
                                     right: 30px;
                                     bottom: auto;
-                                    font-size: 3.75em;
                                     transform: translateX(0) translateY(0);
+                                    .num{
+                                        font-family: 'Elianto';
+                                        font-size: 3.75em;
+                                        & + .num{
+                                            position: relative;
+                                            left: 0;
+                                        }
+                                    }
                                 }
                                 .more{ display: none; }
                                 &:hover figure img{ filter: grayscale(100%); }
@@ -288,7 +307,9 @@
             & + .article-holder{ margin-top: 30px; }
             .article > .inner a{
                 h2{ font-size: 1.5em; }
-                .number { font-size: 1.875em; }
+                .number-holder{
+                    .num{ font-size: 1.875em; }
+                }
             }
         }
     }
@@ -310,6 +331,11 @@
                     top: 15px;
                     right: 15px;
                     font-size: 1.5em;
+                }
+                .number-holder{
+                    top: 15px;
+                    right: 15px;
+                    .num{ font-size: 1.5em; }
                 }
             }
         }

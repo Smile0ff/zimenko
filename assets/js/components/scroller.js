@@ -11,7 +11,7 @@ const scrollAccelerator = 40;
 const galleryHolder = $('#gallery-holder');
 const galleryList = $('#gallery-list');
 const galleryItems = galleryList.find('.gallery-item');
-const galleryItemsCount = galleryItems.length - 1;
+const galleryItemsCount = galleryItems.length;
 
 const scrollProgress = $('#scroll-progress');
 
@@ -38,7 +38,9 @@ class Scroller extends EventEmitter{
 
         this.loopID = null;
 
-        this._UIevents();      
+        this._UIevents();
+
+        this.setCSS();    
     }
     _UIevents(){
         galleryHolder.on('mousedown', (e) => this.handleMouseDown(e))
@@ -56,7 +58,12 @@ class Scroller extends EventEmitter{
         }
     }
     getTotalWidth(){
-        return this.dimension.w * galleryItemsCount;
+        return this.dimension.w * (galleryItemsCount - 1);
+    }
+    setCSS(){
+        let width = galleryItemsCount * 100;
+
+        galleryList.css({ width: width + '%' });
     }
     handleMouseDown(e){
         if(this.isAnimated) return;

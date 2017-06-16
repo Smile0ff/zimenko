@@ -1,0 +1,197 @@
+@import '../components/common.less';
+@import '../components/navigation.less';
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout start                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+html,
+body,
+#page,
+#content{
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+#common-loader-holder{ display: block; }
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout end                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  lookbook start                            */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.lookbook-holder{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    & > .inner{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        cursor: move;
+        cursor: grab;
+        overflow: hidden;
+        &:active{ cursor: grabbing; }
+        & > .lookbook{
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-flow: 0 1 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            .album-holder{
+                width: 100%;
+                height: 100%;
+                position: relative;
+                flex: 0 1 100%;
+                overflow: hidden;
+                & > h2{
+                    display: inline-block;
+                    position: absolute;
+                    top: 50%;
+                    left: 60px;
+                    transform-origin: 0 0;
+                    font-size: 1em;
+                    transform: rotate(-90deg) translateX(-50%);
+                    overflow: hidden;
+                    & > span{
+                        display: inline-block;
+                        vertical-align: middle;
+                        font-size: .875em;
+                        font-weight: 500;
+                        color: @black;
+                        text-transform: uppercase;
+                        &.line{
+                            width: 60px;
+                            height: 1px;
+                            margin: 0 15px;
+                            background: @black;
+                        }
+                    }
+                }
+                .album{
+                    width: 38.54166666666667%;
+                    height: auto;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(-50%);
+                    .inner{
+                        width: 100%;
+                        height: 0;
+                        padding-top: 56.25%;
+                        box-sizing: border-box;
+                        a{
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            figure{
+                                width: 100%;
+                                height: 100%;
+                                img{
+                                    width: 100%;
+                                    height: auto;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 0;
+                                    transition: all .4s @easing 0s;
+                                    filter: grayscale(100%);
+                                    transform: translateY(-50%);
+                                    overflow: hidden;
+                                }
+                            }
+                            .number-holder{
+                                display: inline-block;
+                                vertical-align: top;
+                                position: absolute;
+                                bottom: -6px;
+                                right: 0;
+                                transform: translateX(50%) translateY(50%);
+                                .num{
+                                    display: inline-block;
+                                    vertical-align: top;
+                                    position: relative;
+                                    font-family: 'Elianto';
+                                    font-size: 11em;
+                                    font-size: 9.166666666666667vw;
+                                    color: @gold;
+                                    & + .num{
+                                        position: absolute;
+                                        top: 0;
+                                        left: 100%;
+                                    }
+                                }
+                            }
+                            .more{
+                                display: inline-block;
+                                vertical-align: top;
+                                position: absolute;
+                                left: 50%;
+                                bottom: -45px;
+                                z-index: 5;
+                                font-size: .75em;
+                                font-weight: 300;
+                                color: @gold;
+                                text-transform: uppercase;
+                                letter-spacing: .6em;
+                                text-indent: .6em;
+                                transform: translateX(-50%);
+                            }
+                            &:hover{
+                                figure img{ filter: grayscale(0%); }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    & > .tooltip-holder{
+        display: inline-block;
+        vertical-align: top;
+        position: absolute;
+        right: 60px;
+        bottom: 45px;
+        z-index: 5;
+        overflow: hidden;
+        .text{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: .875em;
+            color: @black;
+            text-transform: lowercase;
+        }
+        .icon{
+            display: inline-block;
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            font-size: 1.5em;
+            color: @black;
+            margin-left: 15px;
+        }
+    }
+}
+
+#progress-holder{ display: none; }
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  lookbook end                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  adaptive start                            */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@media only screen and @tablet{
+
+    
+
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  adaptive end                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

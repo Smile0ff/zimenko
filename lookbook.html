@@ -34,7 +34,7 @@
     <link rel="icon" type="image/png" href="assets/images/favicons/96x96.png">
     <link rel="icon" type="image/png" href="assets/images/favicons/160x160.png">
     <link rel="icon" type="image/png" href="assets/images/favicons/192x192.png"-->
-    <link rel="stylesheet" href="build/css/about.bundle.min.css">
+    <link rel="stylesheet" href="build/css/lookbook.bundle.min.css">
 </head>
 <body class="preload">
     <div id="page">
@@ -169,25 +169,176 @@
             <span class="text-overlay">Zimenko</span>
         </div>
         <main id="content">
-            <section class="container about-holder">
-                <div class="photo-holder">
-                    <figure>
-                        <img src="build/images/zimenko.png" alt="Zimenko Yuriy">
-                    </figure>
+            <section class="container lookbook-holder">
+                <div class="categories-holder">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="line"></span>
+                                <span class="text">Apartments</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="line"></span>
+                                <span class="text">Houses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="line"></span>
+                                <span class="text">Objects</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="inner">
-                    <div class="info-holder">
-                        <h1>Design studio of <span>Yuriy Zimenko</span></h1>
-                        <p>Мы создаем стиль. Мы умеем слышать нашего клиента. Мы не тиражируем объекты, они всегда индивидуальны, как люди, которые приходят к нам со своей мечтой.</p>
+                <div class="inner" id="gallery-holder">
+                    <div class="lookbook" id="gallery-list">
+                        <article class="album-holder gallery-item">
+                            <h2>
+                                <span class="style">modern</span>
+                                <span class="line"></span>
+                                <span class="title">Glare of the sea</span>
+                            </h2>
+                            <div class="album">
+                                <div class="inner">
+                                    <a href="#">
+                                        <figure>
+                                            <img src="build/images/articles/photo-1.jpg" alt="The art of sketching">
+                                        </figure>
+                                        <span class="number-holder">
+                                            <span class="num">0</span>
+                                            <span class="num">1</span>
+                                        </span>
+                                        <span class="more">view album</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="album-holder gallery-item">
+                            <h2>
+                                <span class="style">modern</span>
+                                <span class="line"></span>
+                                <span class="title">Glare of the sea</span>
+                            </h2>
+                            <div class="album">
+                                <div class="inner">
+                                    <a href="#">
+                                        <figure>
+                                            <img src="build/images/articles/photo-1.jpg" alt="The art of sketching">
+                                        </figure>
+                                        <span class="number-holder">
+                                            <span class="num">0</span>
+                                            <span class="num">2</span>
+                                        </span>
+                                        <span class="more">view album</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="album-holder gallery-item">
+                            <h2>
+                                <span class="style">modern</span>
+                                <span class="line"></span>
+                                <span class="title">Glare of the sea</span>
+                            </h2>
+                            <div class="album">
+                                <div class="inner">
+                                    <a href="#">
+                                        <figure>
+                                            <img src="build/images/articles/photo-1.jpg" alt="The art of sketching">
+                                        </figure>
+                                        <span class="number-holder">
+                                            <span class="num">0</span>
+                                            <span class="num">3</span>
+                                        </span>
+                                        <span class="more">view album</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="album-holder gallery-item">
+                            <h2>
+                                <span class="style">modern</span>
+                                <span class="line"></span>
+                                <span class="title">Glare of the sea</span>
+                            </h2>
+                            <div class="album">
+                                <div class="inner">
+                                    <a href="#">
+                                        <figure>
+                                            <img src="build/images/articles/photo-1.jpg" alt="The art of sketching">
+                                        </figure>
+                                        <span class="number-holder">
+                                            <span class="num">0</span>
+                                            <span class="num">4</span>
+                                        </span>
+                                        <span class="more">view album</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="album-holder gallery-item">
+                            <h2>
+                                <span class="style">modern</span>
+                                <span class="line"></span>
+                                <span class="title">Glare of the sea</span>
+                            </h2>
+                            <div class="album">
+                                <div class="inner">
+                                    <a href="#">
+                                        <figure>
+                                            <img src="build/images/articles/photo-1.jpg" alt="The art of sketching">
+                                        </figure>
+                                        <span class="number-holder">
+                                            <span class="num">0</span>
+                                            <span class="num">5</span>
+                                        </span>
+                                        <span class="more">view album</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
-                <div class="btn btn-contact">
-                    <a href="#">
-                        <span class="text">Contact us</span>
-                    </a>
+                <div class="tooltip-holder">
+                    <span class="text">scroll or drag to discover more</span>
+                    <span class="icon icon-arrow-small-right"></span>
                 </div>
             </section>
         </main>
+        <span id="navigation-link">Navigation</span>
+        <div id="navigation-holder">
+            <div class="navigation">
+                <a href="#" class="link prev">
+                    <span class="icon icon-arrow-small-left"></span>
+                    <span class="text">prev page</span>
+                </a>
+                <ul>
+                    <li class="active">
+                        <a href="#"></a>
+                    </li>
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                </ul>
+                <a href="#" class="link next">
+                    <span class="text">next page</span>
+                    <span class="icon icon-arrow-small-right"></span>
+                </a>
+            </div>
+            <span class="scroll-progress" id="scroll-progress"></span>
+            <span class="menu-underline"></span>
+        </div>
         <div id="progress-holder">
             <span class="progress-line"></span>
         </div>
@@ -197,6 +348,6 @@
             </div>
         </div>
     </div>
-    <script src="build/js/about.bundle.min.js"></script>
+    <script src="build/js/lookbook.bundle.dev.js"></script>
 </body>
 </html>
