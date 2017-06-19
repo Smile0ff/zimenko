@@ -1,0 +1,142 @@
+@import '../components/common.less';
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout start                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+html,
+body,
+#page,
+#content{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+#common-loader-holder{ display: none; }
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout end                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  album start                               */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.album-holder{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+    & > .gallery-holder{
+        width: 100%;
+        height: 100%;
+        user-select: none;
+        overflow: hidden;
+        .gallery{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            cursor: move;
+            cursor: grab;
+            overflow: hidden;
+            &:active{ cursor: grabbing; }
+            .gallery-list{
+                display: flex;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                flex-flow: row nowrap;
+                overflow: hidden;
+                .gallery-item{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    flex: 0 1 100%;
+                    overflow: hidden;
+                    & > .photo-holder{
+                        width: 38.54166666666667%;
+                        height: auto;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        cursor: pointer;
+                        transform: translateX(-50%) translateY(-50%);
+                        overflow: hidden;
+                        & > .inner{
+                            width: 100%;
+                            height: 0;
+                            position: relative;
+                            padding-top: 56.25%;
+                            box-sizing: border-box;
+                            overflow: hidden;
+                            figure{
+                                width: 100%;
+                                height: 100%;
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                overflow: hidden;
+                                img{
+                                    display: block;
+                                    width: 100%;
+                                    height: auto;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 0;
+                                    filter: grayscale(100%);
+                                    transition: all .4s @easing 0s;
+                                    transform: translateY(-50%);
+                                    backface-visibility: hidden;
+                                    overflow: hidden;
+                                }
+                            }
+                            &:hover{
+                                figure img{ filter: grayscale(0%);  }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    & > .photo-view-holder{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        opacity: 0;
+        transition: all .4s @easing 0s;
+        background: @white;
+        visibility: hidden;
+        overflow: hidden;
+        & > figure{
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 1;
+            transition: all .2s @easing 0s;
+            visibility: visible;
+            overflow: hidden;
+            &.__loading{
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    }
+}
+
+#page.__photo-active .album-holder{
+    & > .photo-view-holder{
+        opacity: 1;
+        visibility: visible;
+    }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  album end                                 */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
