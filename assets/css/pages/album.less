@@ -100,6 +100,188 @@ body,
                 }
             }
         }
+        & > .arrow{
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            z-index: 5;
+            cursor: pointer;
+            overflow: hidden;
+            &.arrow-left{
+                left: 60px;
+                .icon{ margin-right: 15px; }
+            }
+            &.arrow-right{
+                right: 60px;
+                .icon{ margin-left: 15px; }
+            }
+            .icon,
+            .text{
+                display: inline-block;
+                vertical-align: middle;
+                color: @black;
+                position: relative;
+                transition: all .2s @easing 0s;
+            }
+            .icon{
+                width: 24px;
+                height: 24px;
+                font-size: 1.5em;
+            }
+            .text{
+                font-size: .875em;
+                text-transform: lowercase;
+            }
+            &:hover{
+                & > .icon,
+                & > .text{
+                    color: @gold;
+                }
+            }
+        }
+        & > .info-btn{
+            display: block;
+            width: 45px;
+            height: 45px;
+            position: absolute;
+            left: 60px;
+            bottom: 45px;
+            z-index: 5;
+            cursor: pointer;
+            border-radius: 50%;
+            background: @gray;
+            transition: all .2s @easing 0s;
+            overflow: hidden;
+            .icon{
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                font-size: .75em;
+                color: @black;
+                margin: -6px 0 0 -6px;
+                transition: all .2s @easing 0s;
+            }
+            &:hover{
+                background: @gold;
+                .icon{ color: @white; }
+            }
+        }
+        & > .title-holder{
+            display: inline-block;
+            position: absolute;
+            left: 50%;
+            bottom: 45px;
+            z-index: 5;
+            transform: translateX(-50%);
+            overflow: hidden;
+            & > span{
+                display: inline-block;
+                vertical-align: middle;
+                font-size: .875em;
+                font-weight: 500;
+                color: @black;
+                text-transform: uppercase;
+            }
+            & > .line{
+                width: 60px;
+                height: 1px;
+                margin: 0 15px;
+                background: @black;
+            }
+        }
+        & > .tooltip{
+            display: inline-block;
+            position: absolute;
+            right: 60px;
+            bottom: 45px;
+            overflow: hidden;
+            .text,
+            .icon{
+                display: inline-block;
+                vertical-align: middle;
+                color: @black;
+                overflow: hidden;
+            }
+            .text{
+                font-size: .875em;
+                margin-right: 15px;
+            }
+            .icon{
+                width: 24px;
+                height: 24px;
+                font-size: 1.5em;
+            }
+        }
+    }
+    & > .info-holder{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        opacity: 0;
+        background: fade(@white, 95%);
+        transition: all .4s @easing 0s;
+        visibility: hidden;
+        overflow: hidden;
+        & > .inner{
+            width: 50%;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+            padding: 120px 0 180px;
+            opacity: 0;
+            box-sizing: border-box;
+            transition: all .4s @easing 0s;
+            overflow: hidden;
+            & > .info{
+                width: 100%;
+                height: 100%;
+                overflow-y: scroll;
+                padding-right: 25px;
+                h1{
+                    font-size: 1.875em;
+                    font-weight: 500;
+                    color: @black;
+                    text-transform: uppercase;
+                }
+                .line{
+                    display: block;
+                    width: 100%;
+                    height: 1px;
+                    margin: 30px 0;
+                    background: @gray;
+                    overflow: hidden;
+                }
+                p{
+                    font-size: 1em;
+                    color: @black;
+                    & + p{ margin-top: 15px; }
+                }
+            }
+        }
+        & > .icon{
+            display: inline-block;
+            position: absolute;
+            right: 60px;
+            bottom: 45px;
+            z-index: 5;
+            font-size: 3.75em;
+            color: @black;
+            overflow: hidden;
+        }
+        & > .btn-close{
+            position: absolute;
+            left: 50%;
+            bottom: 60px;
+            transition: all .4s @easing 0s;
+            transform: translateX(-50%) scale(0);
+            overflow: hidden;
+        }
     }
     & > .photo-view-holder{
         width: 100%;
@@ -109,32 +291,71 @@ body,
         left: 0;
         z-index: 20;
         opacity: 0;
-        transition: all .4s @easing 0s;
         background: @white;
+        transition: all .2s @easing 0s;
         visibility: hidden;
         overflow: hidden;
-        & > figure{
+        & > .photo-holder{
             width: 100%;
-            height: auto;
+            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
-            opacity: 1;
-            transition: all .2s @easing 0s;
-            visibility: visible;
-            overflow: hidden;
-            &.__loading{
+            & > figure{
+                width: 100%;
+                height: auto;
+                position: absolute;
+                top: 50%;
+                left: 0;
                 opacity: 0;
-                visibility: hidden;
+                transition: all .4s @easing 0s;
+                transform: translateY(-50%);
+                overflow: visible;
+                img{
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    overflow: hidden;
+                }
             }
         }
+        & > .btn-close{
+            position: absolute;
+            left: 50%;
+            bottom: 60px;
+            transition: all .2s @easing 0s;
+            transform: translateX(-50%) scale(0);
+        }
+    }
+}
+
+#page.__info-active .album-holder{
+    & > .info-holder{
+        opacity: 1;
+        visibility: visible;
+        & > .inner{
+            opacity: 1;
+        }
+        & > .btn-close{
+            transform: translateX(-50%) scale(1);
+        }
+    }
+}
+
+#page.__photo-loading .album-holder,
+#page.__photo-active .album-holder{
+    & > .photo-view-holder{
+        opacity: 1;
+        visibility: visible;
+        & > .btn-close{ transform: translateX(-50%) scale(1); }
     }
 }
 
 #page.__photo-active .album-holder{
     & > .photo-view-holder{
-        opacity: 1;
-        visibility: visible;
+        & > .photo-holder figure{
+            opacity: 1;
+        }
     }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
