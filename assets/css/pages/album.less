@@ -12,7 +12,7 @@ body,
     overflow: hidden;
 }
 
-#common-loader-holder{ display: none; }
+#common-loader-holder{ display: block; }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  layout end                                */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -26,6 +26,32 @@ body,
     min-height: 100%;
     position: relative;
     overflow: hidden;
+    & > .back-link{
+        display: none;
+        width: 45px;
+        height: 45px;
+        position: absolute;
+        left: 50%;
+        bottom: 75px;
+        z-index: 10;
+        transform: translateX(-50%);
+        overflow: hidden;
+        & > a{
+            background: @gold;
+            &:before{ display: none; }
+            .icon{
+                display: block;
+                width: 12px;
+                height: 12px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                font-size: .75em;
+                color: @white;
+                transform: translateX(-50%) translateY(-50%);
+            }
+        }
+    }
     & > .gallery-holder{
         width: 100%;
         height: 100%;
@@ -360,4 +386,156 @@ body,
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  album end                                 */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  adaptive start                            */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@media only screen and @tablet{
+    
+    #header{ display: none; }
+
+    .album-holder{
+        &:before{
+            display: block;
+            width: 100%;
+            height: 6px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            content: "";
+            background: @gold;
+            overflow: hidden;
+        }
+        & > .back-link{
+            display: block;
+        }
+        & > .gallery-holder{
+            .gallery{
+                cursor: auto;
+                &:active{ cursor: auto; }
+                .gallery-list{
+                    .gallery-item{
+                        padding: 60px;
+                        box-sizing: border-box;
+                        & > .photo-holder{
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                            top: 0;
+                            left: 0;
+                            cursor: auto;
+                            transform: translateX(0) translateY(0);
+                            overflow: hidden;
+                            & > .inner{
+                                height: 100%;
+                                padding-top: 0;
+                                figure{
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    overflow: hidden;
+                                    img{
+                                        width: auto;
+                                        height: auto;
+                                        top: 0;
+                                        left: 0;
+                                        filter: grayscale(0%);
+                                        transition: none;
+                                        transform: translateX(0%) translateY(0%);
+                                        &.portrait{
+                                            width: auto;
+                                            height: 100%;
+                                            top: 0;
+                                            left: 50%;
+                                            transform: translateX(-50%) translateY(0%);
+                                        }
+                                        &.landscape{
+                                            width: 100%;
+                                            height: auto;
+                                            top: 50%;
+                                            left: 0%;
+                                            transform: translateX(0%) translateY(-50%);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            & > .arrow,
+            & > .info-btn,
+            & > .tooltip,
+            & > .title-holder{
+                display: none;
+            }
+        }
+        & > .info-holder,
+        & > .photo-view-holder{ display: none; }
+    }
+
+}
+
+@media only screen and @tabletLandscape{
+
+    .album-holder{
+        &:before{
+            height: 3px;
+        }
+        & > .gallery-holder{
+            .gallery .gallery-list .gallery-item{
+                padding: 30px 60px;
+                box-sizing: border-box;
+            }
+        }
+    }
+
+}
+
+@media only screen and @phonePortrait{
+
+    .album-holder{
+        &:before{
+            height: 3px;
+        }
+        & > .back-link{
+            bottom: 45px;
+        }
+        & > .gallery-holder{
+            .gallery{
+                .gallery-list{
+                    .gallery-item{
+                        padding: 30px;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and @phoneLandscape{
+
+    .album-holder{
+        & > .back-link{ bottom: 45px; }
+        & > .gallery-holder{
+            .gallery{
+                .gallery-list{
+                    .gallery-item{
+                        padding: 30px;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+    }
+
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  adaptive end                              */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
