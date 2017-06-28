@@ -1,0 +1,247 @@
+@import '../components/common.less';
+@import '../components/forms.less';
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout start                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+html,
+body,
+#page,
+#content{
+    overflow: visible;
+}
+
+
+#common-loader-holder{ display: none; }
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout end                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  header start                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#header{
+    #logo-holder{
+        & > a{
+            .circle{ stroke: @white; }
+            .letters{ fill: @white; }
+        }
+    }
+    & > .open-menu-button .circle{ background: @white; }
+    & > .langs-holder ul li a{ color: @white; }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  header end                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  contacts start                            */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.contacts-holder{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    background: @black;
+    overflow: visible;
+    & > .text-overlay{
+        display: inline-block;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        font-family: 'Elianto';
+        font-size: 11.25em;
+        font-size: 9.375vw;
+        color: darken(@black, 2%);
+        text-transform: uppercase;
+        transform: translateX(-50%) translateY(-50%);
+    }
+    & > .socials-holder{
+        display: inline-block;
+        position: fixed;
+        left: 60px;
+        bottom: 60px;
+        z-index: 9;
+        overflow: hidden;
+        ul, li, a{
+            display: inline-block;
+            vertical-align: middle;
+            overflow: hidden;
+        }
+        ul li{
+            & + li{ margin-left: 60px; }
+            a{
+                .line{
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 60px;
+                    height: 1px;
+                    position: relative;
+                    margin-right: 15px;
+                    background: @white;
+                    overflow: hidden;
+                    &:before{
+                        display: block;
+                        width: 100%;
+                        height: 1px;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        content: "";
+                        background: @gold;
+                        transition: all .2s @easing 0s;
+                        transform: translateX(-100%);
+                        overflow: hidden;
+                    }
+                }
+                .text{
+                    font-size: .875em;
+                    color: @white;
+                    transition: all .2s @easing 0s;
+                }
+                &:hover{
+                    .line:before{ transform: translateX(0%); }
+                    .text{ color: @gold; }
+                }
+            }
+        }
+    }
+    & > .email-holder{
+        display: inline-block;
+        position: fixed;
+        right: 60px;
+        bottom: 60px;
+        z-index: 9;
+        overflow: hidden;
+        a{
+            .line{
+                display: inline-block;
+                vertical-align: middle;
+                width: 60px;
+                height: 1px;
+                margin-right: 15px;
+                position: relative;
+                background: @white;
+                overflow: hidden;
+                &:before{
+                    display: block;
+                    width: 100%;
+                    height: 1px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: "";
+                    background: @gold;
+                    transition: all .2s @easing 0s;
+                    transform: translateX(-100%);
+                    overflow: hidden;
+                }
+            }
+            .text{
+                display: inline-block;
+                vertical-align: middle;
+                font-size: .875em;
+                color: @white;
+                transition: all .2s @easing 0s;
+            }
+            &:hover{
+                .line:before{ transform: translateX(0%); }
+                .text{ color: @gold; }
+            }
+        }
+    }
+    & > .intro-holder{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 5;
+        overflow: hidden;
+        & > .contact-info{
+            display: block;
+            width: 100%;
+            height: auto;
+            position: absolute;
+            left: 0;
+            bottom: 180px;
+            overflow: hidden;
+            h2{
+                font-size: 1.5em;
+                color: @white;
+                text-align: center;
+                text-transform: uppercase;
+            }
+            .inner{
+                display: flex;
+                width: 100%;
+                height: auto;
+                margin-top: 60px;
+                padding: 0 60px;
+                box-sizing: border-box;
+                justify-content: center;
+                overflow: hidden;
+                .contact{
+                    & + .contact{ margin-left: 60px; }
+                    span, a{
+                        display: inline-block;
+                        vertical-align: middle;
+                        font-size: 1.125em;
+                        text-transform: uppercase;
+                    }
+                    .title{
+                        font-weight: 300;
+                        color: @gold;
+                    }
+                    a{
+                        font-weight: 500;
+                        color: @white;
+                        margin: 0 30px;
+                    }
+                    .type{
+                        font-weight: 300;
+                        font-size: .875em;
+                        color: @gray;
+                    }
+                }
+            }
+        }
+    }
+    & > .enquiry-holder{
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding-top: 60px;
+        background: @black;
+        overflow: hidden;
+        h2{
+            font-size: 1.5em;
+            color: @white;
+            position: relative;
+            z-index: 5;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        & > .inner{
+            width: 100%;
+            height: auto;
+            margin-top: 90px;
+            padding: 0 60px;
+            position: relative;
+            z-index: 5;
+            box-sizing: border-box;
+            background: transparent;
+            overflow: hidden;
+        }
+    }
+}
+
+#enquiry-form{
+    width: 800px;
+    margin: 0 auto 150px;
+    background: transparent;
+    button[type="submit"]{
+        float: right;
+    }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  contacts end                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

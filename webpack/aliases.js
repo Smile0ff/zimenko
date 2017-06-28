@@ -9,7 +9,8 @@ const aliases = {
     '@containers': path.join(jsPath, 'containers'),
     '@components': path.join(jsPath, 'components'),
     '@decorators': path.join(jsPath, 'decorators'),
-    '@utility': path.join(jsPath, 'utility')
+    '@utility': path.join(jsPath, 'utility'),
+    '@forms': path.join(jsPath, 'forms')
 }
 
 module.exports = aliases;
