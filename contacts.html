@@ -218,7 +218,7 @@
                 <section class="enquiry-holder">
                     <h2>Напишите нам</h2>
                     <div class="inner">
-                        <form action="/php/enquiry.php" method="POST" enctype="application/x-www-form-urlencoded" id="enquiry-form">
+                        <form action="http://localhost:3001/enquiry" method="POST" enctype="application/x-www-form-urlencoded" id="enquiry-form">
                             <div class="form-control">
                                 <input
                                     type="text"
@@ -253,11 +253,18 @@
                                 ></textarea>
                             </div>
                             <button type="submit">
-                                <span>Отправить</span>
+                                <span class="text">Отправить</span>
                             </button>
                         </form>
                     </div>
                 </section>
+                <div id="response-holder">
+                    <span class="close icon icon-close"></span>
+                    <div class="inner"></div>
+                </div>
+                <div id="ajax-loader">
+                    <span class="loader"></span>
+                </div>
             </div>
         </main>
         <div id="progress-holder">
@@ -269,6 +276,6 @@
             </div>
         </div>
     </div>
-    <script src="build/js/contact.bundle.dev.js"></script>
+    <script src="build/js/contact.bundle.min.js"></script>
 </body>
 </html>

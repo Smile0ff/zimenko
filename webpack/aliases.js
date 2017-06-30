@@ -8,7 +8,7 @@ const aliases = {
     '@constants': path.join(jsPath, 'constants'),
     '@containers': path.join(jsPath, 'containers'),
     '@components': path.join(jsPath, 'components'),
-    '@decorators': path.join(jsPath, 'decorators'),
+    '@services': path.join(jsPath, 'services'),
     '@utility': path.join(jsPath, 'utility'),
     '@forms': path.join(jsPath, 'forms')
 }

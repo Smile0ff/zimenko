@@ -1,8 +1,13 @@
 {
     'presets': ['es2015', 'stage-0'],
     'plugins': [
+        'transform-async-to-generator',
         'transform-class-properties',
         'transform-decorators-legacy',
-        'transform-object-assign'
+        'transform-object-assign',
+        ["transform-runtime", {
+            "polyfill": false,
+            "regenerator": true
+        }]
     ]
 }
