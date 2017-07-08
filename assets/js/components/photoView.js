@@ -1,4 +1,4 @@
-const ANIMATION_TIME = 600;
+const ANIMATION_TIME = 1000;
 
 const ESC_CODE = 27;
 

@@ -352,6 +352,29 @@ body,
             transition: all .2s @easing 0s;
             transform: translateX(-50%) scale(0);
         }
+        & > .photo-loader{
+            width: 180px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 5;
+            opacity: 0;
+            transition: all .2s @easing 0s;
+            transform: translateX(-50%) translateY(-50%);
+            visibility: hidden;
+            overflow: hidden;
+            & > svg{
+                position: relative;
+                .letter{
+                    fill: none;
+                    stroke-dasharray: 500;
+                    stroke-width: 1px;
+                    stroke: @gold;
+                    animation: none;
+                }
+            }
+        }
     }
 }
 
@@ -379,10 +402,23 @@ body,
 
 #page.__photo-active .album-holder{
     & > .photo-view-holder{
-        & > .photo-holder figure{
+        & > .photo-holder figure{ opacity: 1; }
+    }
+}
+
+#page.__photo-loading .album-holder{
+    & > .photo-view-holder{
+        .photo-loader{
             opacity: 1;
+            visibility: visible;
+            .letter{ animation: photoLoading 2s @easing 0s infinite; }
         }
     }
+}
+
+@keyframes photoLoading{
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 1000; }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  album end                                 */
