@@ -3,7 +3,7 @@ import { TOGGLE_MENU } from '@constants/homeConstants';
 import Menu from '@components/menu';
 import Scroller from '@components/scroller';
 import ToggleHeader from '@components/toggleHeader';
-import ColorizeLookbook from '@components/ColorizeLookbook';
+import ColorizeLookbook from '@components/colorizeLookbook';
 
 import isMobile from '@utility/isMobile';
 

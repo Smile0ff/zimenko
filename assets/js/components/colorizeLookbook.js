@@ -1,7 +1,7 @@
 const galleryHolder = $('#gallery-holder');
 const galleryItems = galleryHolder.find('.gallery-item');
 
-class ColorizeAlbums{
+class ColorizeLookbook{
 
     constructor(){
         this._UIevents();
@@ -37,4 +37,4 @@ class ColorizeAlbums{
     }
 }
 
-export default ColorizeAlbums;
+export default ColorizeLookbook;
