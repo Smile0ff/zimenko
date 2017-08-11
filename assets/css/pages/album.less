@@ -82,44 +82,39 @@ body,
                     flex: 0 1 100%;
                     overflow: hidden;
                     & > .photo-holder{
-                        width: 38.54166666666667%;
-                        height: auto;
                         position: absolute;
                         top: 50%;
                         left: 50%;
                         cursor: pointer;
                         transform: translateX(-50%) translateY(-50%);
                         overflow: hidden;
-                        & > .inner{
-                            width: 100%;
-                            height: 0;
-                            position: relative;
-                            padding-top: 56.25%;
-                            box-sizing: border-box;
-                            overflow: hidden;
-                            figure{
+                        &.landscape{
+                            width: 38.54166666666667%;
+                            height: auto;
+                            figure,
+                            figure > img{
                                 width: 100%;
-                                height: 100%;
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                overflow: hidden;
-                                img{
-                                    display: block;
-                                    width: 100%;
-                                    height: auto;
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 0;
-                                    filter: grayscale(100%);
-                                    transition: all .4s @easing 0s;
-                                    transform: translateY(-50%);
-                                    backface-visibility: hidden;
-                                    overflow: hidden;
-                                }
+                                height: auto;
                             }
-                            &:hover{
-                                figure img{ filter: grayscale(0%);  }
+                        }
+                        &.portrait{
+                            width: auto;
+                            height: 60%;
+                            figure,
+                            figure > img{
+                                width: auto;
+                                height: 100%;
+                            }
+                        }
+                        figure{
+                            position: relative;
+                            overflow: hidden;
+                            img{
+                                display: block;
+                                filter: grayscale(100%);
+                                transition: all .4s @easing 0s;
+                                overflow: hidden;
+                                &:hover{ filter: grayscale(0%); }
                             }
                         }
                     }
@@ -319,29 +314,58 @@ body,
         opacity: 0;
         background: @white;
         transition: all .2s @easing 0s;
+        box-sizing: border-box;
         visibility: hidden;
         overflow: hidden;
-        & > .photo-holder{
+        & > .inner{
             width: 100%;
             height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            & > figure{
+            position: relative;
+            opacity: 0;
+            transition: all .2s @easing 0s;
+            overflow: hidden;
+            .photo-holder{
                 width: 100%;
-                height: auto;
+                height: 100%;
                 position: absolute;
                 top: 50%;
-                left: 0;
-                opacity: 0;
-                transition: all .4s @easing 0s;
-                transform: translateY(-50%);
-                overflow: visible;
-                img{
-                    display: block;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                overflow: hidden;
+                & > figure{
                     width: 100%;
                     height: auto;
-                    overflow: hidden;
+                    position: relative;
+                    overflow: visible;
+                    img{
+                        display: block;
+                        width: 100%;
+                        height: auto;
+                        margin: 0 auto;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+        &.portrait{
+            padding: 90px 0;
+            & > .inner{
+                .photo-holder,
+                figure,
+                figure > img{
+                    width: auto;
+                    height: 100%;
+                }
+            }
+        }
+        &.landscape{
+            padding: 90px 15.625%;
+            & > .inner{
+                .photo-holder,
+                figure,
+                figure > img{
+                    width: 100%;
+                    height: auto;
                 }
             }
         }
@@ -400,12 +424,6 @@ body,
     }
 }
 
-#page.__photo-active .album-holder{
-    & > .photo-view-holder{
-        & > .photo-holder figure{ opacity: 1; }
-    }
-}
-
 #page.__photo-loading .album-holder{
     & > .photo-view-holder{
         .photo-loader{
@@ -413,6 +431,12 @@ body,
             visibility: visible;
             .letter{ animation: photoLoading 2s @easing 0s infinite; }
         }
+    }
+}
+
+#page.__photo-active .album-holder{
+    & > .photo-view-holder{
+        & > .inner{ opacity: 1; }
     }
 }
 
@@ -446,6 +470,10 @@ body,
         }
         & > .back-link{
             display: block;
+            left: auto;
+            right: 60px;
+            bottom: 30px;
+            transform: translateX(0);
         }
         & > .gallery-holder{
             .gallery{
@@ -453,81 +481,109 @@ body,
                 &:active{ cursor: auto; }
                 .gallery-list{
                     .gallery-item{
-                        padding: 60px;
+                        padding: 90px 60px 105px;
                         box-sizing: border-box;
+                        overflow: hidden;
                         & > .photo-holder{
-                            width: 100%;
-                            height: 100%;
                             position: relative;
-                            top: 0;
-                            left: 0;
-                            cursor: auto;
-                            transform: translateX(0) translateY(0);
-                            overflow: hidden;
-                            & > .inner{
+                            &.portrait{
+                                width: auto;
                                 height: 100%;
-                                padding-top: 0;
-                                figure{
-                                    width: 100%;
-                                    height: 100%;
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    overflow: hidden;
-                                    img{
-                                        width: auto;
-                                        height: auto;
-                                        top: 0;
-                                        left: 0;
-                                        filter: grayscale(0%);
-                                        transition: none;
-                                        transform: translateX(0%) translateY(0%);
-                                        &.portrait{
-                                            width: auto;
-                                            height: 100%;
-                                            top: 0;
-                                            left: 50%;
-                                            transform: translateX(-50%) translateY(0%);
-                                        }
-                                        &.landscape{
-                                            width: 100%;
-                                            height: auto;
-                                            top: 50%;
-                                            left: 0%;
-                                            transform: translateX(0%) translateY(-50%);
-                                        }
-                                    }
-                                }
+                            }
+                            &.landscape{
+                                width: 100%;
+                                height: auto;
+                            }
+                            figure > img{
+                                margin: 0 auto;
+                                filter: grayscale(0%);
                             }
                         }
                     }
                 }
             }
-            & > .arrow,
-            & > .info-btn,
+            & > .arrow{
+                top: 30px;
+                &:hover{
+                    & > .icon,
+                    & > .text{
+                        color: @black;
+                    }
+                }
+            }
+            & > .info-btn{
+                bottom: 30px;
+                &:hover{
+                    background: @gray;
+                    .icon{ color: @black; }
+                }
+            }
             & > .tooltip,
             & > .title-holder{
                 display: none;
             }
         }
-        & > .info-holder,
-        & > .photo-view-holder{ display: none; }
-    }
-
-}
-
-@media only screen and @tabletLandscape{
-
-    .album-holder{
-        &:before{
-            height: 3px;
-        }
-        & > .gallery-holder{
-            .gallery .gallery-list .gallery-item{
-                padding: 30px 60px;
-                box-sizing: border-box;
+        & > .info-holder{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            opacity: 0;
+            background: fade(@white, 95%);
+            transition: all .4s @easing 0s;
+            visibility: hidden;
+            overflow: hidden;
+            & > .inner{
+                width: 100%;
+                height: 100%;
+                padding: 60px 60px 105px;
+                & > .info{
+                    width: 100%;
+                    height: 100%;
+                    overflow-y: scroll;
+                    padding-right: 25px;
+                    h1{
+                        font-size: 1.875em;
+                        font-weight: 500;
+                        color: @black;
+                        text-transform: uppercase;
+                    }
+                    .line{
+                        display: block;
+                        width: 100%;
+                        height: 1px;
+                        margin: 30px 0;
+                        background: @gray;
+                        overflow: hidden;
+                    }
+                    p{
+                        font-size: 1em;
+                        color: @black;
+                        & + p{ margin-top: 15px; }
+                    }
+                }
+            }
+            & > .icon{ display: none; }
+            & > .btn-close{
+                width: 45px;
+                height: 45px;
+                position: absolute;
+                left: 50%;
+                bottom: 30px;
+                transition: all .4s @easing 0s;
+                transform: translateX(-50%) scale(0);
+                overflow: hidden;
+                & > .icon{
+                    width: 12px;
+                    height: 12px;
+                    font-size: .75em;
+                    margin: -6px 0 0 -6px;
+                }
             }
         }
+        & > .photo-view-holder{ display: none; }
     }
 
 }
@@ -539,6 +595,7 @@ body,
             height: 3px;
         }
         & > .back-link{
+            right: 45px;
             bottom: 45px;
         }
         & > .gallery-holder{
@@ -550,24 +607,18 @@ body,
                     }
                 }
             }
-        }
-    }
-
-}
-
-@media only screen and @phoneLandscape{
-
-    .album-holder{
-        & > .back-link{ bottom: 45px; }
-        & > .gallery-holder{
-            .gallery{
-                .gallery-list{
-                    .gallery-item{
-                        padding: 30px;
-                        box-sizing: border-box;
-                    }
-                }
+            & > .arrow{
+                top: 45px;
+                &.arrow-left{ left: 45px; }
+                &.arrow-right{ right: 45px; }
             }
+            & > .info-btn{
+                left: 45px;
+                bottom: 45px;
+            }
+        }
+        & > .info-holder{
+            .btn-close{ bottom: 45px; }
         }
     }
 

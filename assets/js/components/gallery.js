@@ -4,6 +4,8 @@ import PhotoView from '@components/photoView';
 
 import isMobile from '@utility/isMobile';
 import { getPrefixed } from '@utility/vendor';
+import { debounce } from '@utility/debounce';
+import { normalizeScroll } from '@utility/normalizeScroll';
 
 const galleryHolder = $('.gallery-holder');
 const gallery = $('#gallery');
@@ -27,6 +29,8 @@ class Gallery extends EventEmitter{
         super();
         
         this.isDragged = false;
+        this.isPreview = false;
+        this.isInfoActive = false;
 
         this.time = {};
         this.coords = {};
@@ -37,10 +41,12 @@ class Gallery extends EventEmitter{
         this.current = 0;
         this.currentTarget = null;
 
-        this.threshold = isMobile() ? 100 : 150;
+        this.threshold = isMobile() ? 25 : 150;
         this.clickThreshold = 150;
 
         this.friction = 5;
+
+        this.identifyOrientation();
 
         this.applyCommonCSS();
 
@@ -52,14 +58,20 @@ class Gallery extends EventEmitter{
                .on(mouseup, (e) => this.handleMouseUp(e))
                .on(mouseleave, (e) => this.handleMouseUp(e));
 
+        arrows.on('click', (e) => this.handleArrow(e));
+
         if(!isMobile()){
             gallery.on('click', '.photo-holder', (e) => this.handlePhotoView(e));
-            arrows.on('click', (e) => this.handleArrow(e));
 
-            $(document).on('keydown', (e) => this.handleKey(e));
+            $(document)
+                .on('keydown', (e) => this.handleKey(e))
+                .on('mousewheel DOMMouseScroll', (e) => this.handleWheel(e));
         }
         
-        $(window).on('resize', (e) => this.handleResize(e))
+        $(window).on('resize', (e) => this.handleResize(e));
+    }
+    setInfoState(state){
+        this.isInfoActive = state;
     }
     getDimension(){
         return {
@@ -67,11 +79,25 @@ class Gallery extends EventEmitter{
             h: window.innerHeight
         }
     }
+    identifyOrientation(){
+        const imageList = gallery.find('img');
+
+        imageList.each((index, img) => {
+            img = $(img);
+            
+            const parent = img.closest('.photo-holder');
+            const image = new Image();
+
+            image.onload = () => (image.width >= image.height) ? parent.addClass('landscape') : parent.addClass('portrait');
+
+            image.src = img.attr('src');
+        });
+    }
     applyCommonCSS(){
         galleryList.css({ width: itemCount * 100 + '%' });
     }
     handleMouseDown(e){
-        if(this.isAnimated) return;
+        if(this.isAnimated || this.isInfoActive) return;
 
         let x = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].pageX : e.pageX;
 
@@ -84,7 +110,7 @@ class Gallery extends EventEmitter{
         return false;
     }
     handleMouseMove(e){
-        if(!this.isDragged) return;
+        if(!this.isDragged || this.isInfoActive) return;
 
         let x = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].pageX : e.pageX;
 
@@ -102,7 +128,7 @@ class Gallery extends EventEmitter{
         return false;
     }
     handleMouseUp(e){
-        if(!this.isDragged || this.isAnimated) return;
+        if(!this.isDragged || this.isAnimated || this.isInfoActive) return;
 
         let x = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].pageX : e.pageX;
 
@@ -129,17 +155,25 @@ class Gallery extends EventEmitter{
         return false;
     }
     handlePhotoView(e){
+        if(this.isInfoActive) return;
+        
         if(this.time.diff >= this.clickThreshold) return;
+
+        this.isPreview = true;
 
         let target = $(e.currentTarget),
             src = target.data('src');
 
-        new PhotoView(src);
+        let photoView = new PhotoView(src);
+
+        photoView.on('close', () => {
+            this.isPreview = false;
+        });
 
         return false;
     }
     handleArrow(e){
-        if(this.isAnimated) return;
+        if(this.isAnimated || this.isInfoActive) return;
 
         let target = $(e.currentTarget);
 
@@ -158,7 +192,7 @@ class Gallery extends EventEmitter{
         return false;
     }
     handleKey(e){
-        if(this.isAnimated) return;
+        if(this.isAnimated || this.isPreview || this.isInfoActive) return;
 
         let keyCode = e.originalEvent.keyCode;
 
@@ -175,6 +209,28 @@ class Gallery extends EventEmitter{
         this.isAnimated = true;
         this.switchSlide(position);
         this.clearAnimation();
+
+        return false;
+    }
+    handleWheel(e){
+        if(this.isAnimated || this.isPreview || this.isInfoActive) return;
+
+        debounce(25, () => {
+            let delta = normalizeScroll(e.originalEvent);
+
+            this.direction = (delta < 0) ? 'left' : 'right';
+
+            this.updateCurrent();
+
+            this.checkBoundaries();
+
+            let position = this.calculatePosition();
+
+            this.isAnimated = true;
+            this.switchSlide(position);
+            this.clearAnimation();
+
+        });
 
         return false;
     }

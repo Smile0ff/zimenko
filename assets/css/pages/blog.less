@@ -30,10 +30,8 @@
             top: 0;
             left: 0;
             flex-flow: row nowrap;
-            cursor: move;
-            cursor: grab;
+            transition: all .8s @easing 0s;
             overflow: hidden;
-            &:active{ cursor: grabbing; }
             .article-holder{
                 width: 100%;
                 height: 100%;
@@ -66,8 +64,8 @@
                                 left: 100%;
                                 bottom: 21.63461538461538%;
                                 z-index: 5;
-                                font-size: 3.75em;
-                                font-size: 3.125vw;
+                                font-size: 2.625em;
+                                font-size: 2.5vw;
                                 font-weight: 300;
                                 color: @black;
                                 text-transform: uppercase;
@@ -134,70 +132,29 @@
                 }
             }
         }
-        & > .direction-arrow{
-            display: block;
-            width: 30;
-            height: 30;
-            position: absolute;
-            top: 50%;
-            z-index: 5;
-            opacity: 0;
-            transition: all .2s @easing 0s;
-            transform: translateY(-50%);
-            visibility: hidden;
-            overflow: hidden;
-            &.left{ left: 60px; }
-            &.right{ right: 60px; }
-            & > .icon{
-                display: block;
-                width: 30px;
-                height: 30px;
-                font-size: 1.875em;
-                color: @black;
-                overflow: hidden;
-            }
-        }
-        &.__moving-left{
-            .direction-arrow.left{
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-        &.__moving-right{
-            .direction-arrow.right{
-                opacity: 1;
-                visibility: visible;
-            }
-        }
     }
     & > .tooltip-holder{
         display: inline-block;
         position: absolute;
-        right: 60px;
+        max-width: 120px;
+        left: 60px;
         bottom: 45px;
-        z-index: 5;
+        z-index: 10;
+        color: @black;
+        font-size: .875em;
+        text-transform: lowercase;
         overflow: hidden;
-        .text{
-            display: inline-block;
-            vertical-align: middle;
-            color: @black;
-            font-size: .875em;
-            text-transform: lowercase;
-        }
-        .icon{
-            display: inline-block;
-            vertical-align: middle;
-            width: 24px;
-            height: 24px;
-            font-size: 1.5em;
-            color: @black;
-            margin-left: 15px;
-        }
     }
 
 }
 
-#progress-holder{ display: none; }
+#progress-holder{
+    background: @gray;
+    & > .progress-line{
+        transition: all .8s @easing 0s;
+        background: @black;
+    }
+}
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  blog end                                  */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -281,13 +238,15 @@
                     }
                 }
             }
-            & > .direction-arrow{ display: none; }
         }
         & > .tooltip-holder{ display: none; }
 
     }
 
-    #progress-holder{ display: block; }
+    #progress-holder{
+        background: @black;
+        & > .progress-line{ display: none; }
+    }
 
 }
 
@@ -295,23 +254,6 @@
 
     .blog-holder > .inner > .blog .article-holder + .article-holder{
         margin-top: 60px;
-    }
-
-}
-
-@media only screen and @phoneLandscape{
-    
-    .blog-holder{
-        padding: 120px 30px 0;
-        & > .inner > .blog .article-holder{
-            & + .article-holder{ margin-top: 30px; }
-            .article > .inner a{
-                h2{ font-size: 1.5em; }
-                .number-holder{
-                    .num{ font-size: 1.875em; }
-                }
-            }
-        }
     }
 
 }

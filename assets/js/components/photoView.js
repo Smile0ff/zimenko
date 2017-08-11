@@ -1,3 +1,5 @@
+import { EventEmitter } from 'events';
+
 const ANIMATION_TIME = 1000;
 
 const ESC_CODE = 27;
@@ -7,9 +9,11 @@ const photoViewHolder = $('#photo-view');
 const photoHolder = photoViewHolder.find('.photo-holder');
 const photoContainer = $('#photo-container');
 
-class PhotoView{
+class PhotoView extends EventEmitter{
 
     constructor(src){
+        super();
+
         if(!src)
             throw new Error('Path to original photo is required');
 
@@ -18,15 +22,12 @@ class PhotoView{
         this.photoSize = {};
         this.dimension = this.getDimension();
 
-        this.multiplier = 0;
-
         this._loadPhoto(src);
 
         this._UIevents();
     }
     _UIevents(){
-        photoViewHolder.on('mousemove', (e) => this.handleMouseMove(e))
-                       .on('click', '.close-photo-view', (e) => this.handleClose(e));
+        photoViewHolder.on('click', '.close-photo-view', (e) => this.handleClose(e));
 
         $(document).on('keydown', (e) => this.handleKeyDown(e));
         $(window).on('resize', (e) => this.handleResize(e));
@@ -46,7 +47,7 @@ class PhotoView{
 
             this.updatePhoto(photo);
             this.setPhotoSize(photo);
-            this.setMultiplier();
+            this.setPhotoOrientation();
             this.activatePhoto();
 
         };
@@ -57,13 +58,16 @@ class PhotoView{
         photoContainer.html(photo).removeClass('__loading');
     }
     setPhotoSize(photo){
+
         this.photoSize = {
             w: photo.clientWidth,
             h: photo.clientHeight
         }
     }
-    setMultiplier(){
-        this.multiplier = ((this.photoSize.h - this.dimension.h) / this.dimension.h) * -1;
+    setPhotoOrientation(){
+        (this.photoSize.w >= this.photoSize.h)
+            ? photoViewHolder.addClass('landscape')
+            : photoViewHolder.addClass('portrait');
     }
     activatePhoto(){
         let timer = setTimeout(() => {
@@ -73,26 +77,17 @@ class PhotoView{
 
         }, ANIMATION_TIME);
     }
-    handleMouseMove(e){
-        if(!this.isLoading) return;
-
-        let position = (e.pageY - this.dimension.h / 2) * this.multiplier;
-
-        this.slide(position)
-
-        return false;
-    }
     handleClose(e){
-        page.removeClass('__photo-active');
+        this.clear();
+
+        this.emit('close');
 
         return false;
     }
     handleKeyDown(e){
-        let keyCode = e.originalEvent.keyCode;
+        if(e.originalEvent.keyCode !== ESC_CODE) return;
 
-        if(keyCode !== ESC_CODE) return;
-
-        page.removeClass('__photo-active');
+        this.clear();
 
         return false;
     }
@@ -101,16 +96,21 @@ class PhotoView{
         let photo = photoHolder.find('img')[0];
 
         this.setPhotoSize(photo);
-        this.setMultiplier();
+        this.setPhotoOrientation();
         this.activatePhoto();
 
         return false;
     }
-    slide(position = 0){
-        photoHolder.css({
-            transition: 'all .4s @easing 0s',
-            transform: 'translateY('+ position +'px)'
-        });
+    clear(){
+        page.removeClass('__photo-active');
+
+        let timer = setTimeout(() => {
+            
+            photoViewHolder.removeClass('landscape portrait');
+
+            clearTimeout(timer);
+
+        }, 400);
     }
 
 }

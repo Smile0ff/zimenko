@@ -29,7 +29,7 @@ class HeroGallery{
         this.isDragging = false;
         this.isAnimated = false;
 
-        this.threshold = isMobile() ? 50 : 150;
+        this.threshold = isMobile() ? 25 : 150;
 
         this.coords = {};
         this.dimension = {};
@@ -183,7 +183,7 @@ class HeroGallery{
 
     handleScroll(e){
 
-        debounce(100, () => {
+        debounce(25, () => {
 
             if(!this.isEnabled || this.isAnimated) return;
 

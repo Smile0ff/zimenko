@@ -1,19 +1,16 @@
 import { EventEmitter } from 'events';
 
-import '@utility/requestFrame';
+import { debounce } from '@utility/debounce';
 
 import { normalizeScroll } from '@utility/normalizeScroll';
 import { getPrefixed } from '@utility/vendor';
-
-const mouseAccelerator = 40;
-const scrollAccelerator = 40;
 
 const galleryHolder = $('#gallery-holder');
 const galleryList = $('#gallery-list');
 const galleryItems = galleryList.find('.gallery-item');
 const galleryItemsCount = galleryItems.length;
 
-const scrollProgress = $('#scroll-progress');
+const progress = $('#progress-holder > .progress-line');
 
 const transition = getPrefixed('transition');
 const transform = getPrefixed('transform');
@@ -32,21 +29,15 @@ class Scroller extends EventEmitter{
         this.coords = {};
         this.direction = null;
         this.position = 0;
-        this.scrolledPercent = 0;
+        this.progressPercent = 0;
 
-        this.eventType = '';
-
-        this.loopID = null;
+        this.current = 0;
 
         this._UIevents();
 
         this.setCSS();    
     }
     _UIevents(){
-        galleryHolder.on('mousedown', (e) => this.handleMouseDown(e))
-                     .on('mousemove', (e) => this.handleMouseMove(e))
-                     .on('mouseup mouseleave', (e) => this.handleMouseUp(e));
-
         $(document).on('mousewheel DOMMouseScroll', (e) => this.handleMouseWheel(e));
 
         $(window).on('resize', (e) => this.handleResize(e));
@@ -65,111 +56,64 @@ class Scroller extends EventEmitter{
 
         galleryList.css({ width: width + '%' });
     }
-    handleMouseDown(e){
+    handleMouseWheel(e){
         if(this.isAnimated) return;
 
-        this.isPressed = true;
+        debounce(25, () => {
+            let delta = normalizeScroll(e.originalEvent);
 
-        this.eventType = 'drag';
+            this.eventType = 'wheel';
 
-        this.coords.sx = e.pageX;
+            this.direction = (delta < 0) ? 'right' : 'left';
 
-        return false;
-    }
-    handleMouseMove(e){
-        if(!this.isPressed) return;
+            this.updateCurrent();
 
-        this.coords.dx = e.pageX - this.coords.sx;
+            this.checkBoundaries();
 
-        this.direction = (this.coords.dx > 0) ? 'right' : 'left';
+            this.updatePosition();
 
-        this.showDirection();
+            this.updateProgressPercent();
 
-        if(!this.isAnimated){
-            this.isAnimated = true;
-            this.loop();
-        }
-
-        return false;
-    }
-    handleMouseUp(e){
-        if(!this.isPressed) return;
-
-        this.clearDirection();
-
-        this.stopLoop();
-
-        this.isPressed = false;
-        this.isAnimated = false;
-
-        return false;
-    }
-    handleMouseWheel(e){
-        let delta = normalizeScroll(e.originalEvent);
-
-        this.eventType = 'wheel';
-
-        this.direction = (delta < 0) ? 'right' : 'left';
-
-        this.updatePosition();
-
-        this.checkBoundaries();
-
-        this.updateScrolledPercent();
-
-        this.animate();
-
+            this.animate();
+        });
+        
         return false;
     }
     handleResize(e){
         this.dimension = this.getDimension();
         this.totalWidth = this.getTotalWidth();
 
-        this.position = this.totalWidth / 100 * this.scrolledPercent;
+        this.setCSS();
+
+        this.position = this.totalWidth / 100 * this.progressPercent;
 
         this.animate();
 
         return false;
     }
-    updatePosition(){
-        let accelerator = (this.eventType === 'wheel') ? scrollAccelerator : mouseAccelerator;
-
-        this.position += (this.direction === 'right') ? accelerator : accelerator * -1;
+    updateCurrent(){
+        (this.direction === 'left') ? this.current-- : this.current++;
     }
     checkBoundaries(){
-        if(this.position <= 0) this.position = 0;
-        if(this.position >= this.totalWidth) this.position = this.totalWidth;
+        if(this.current <= 0) this.current = 0;
+        if(this.current >= galleryItemsCount - 1) this.current = galleryItemsCount - 1;
     }
-    updateScrolledPercent(){
-        this.scrolledPercent = (this.position / this.totalWidth) * 100;
+    updatePosition(){
+        this.position = this.current * this.dimension.w;
     }
-    showDirection(){
-        if(this.direction === 'left')
-            galleryHolder.removeClass('__moving-right').addClass('__moving-left');
-
-        if(this.direction === 'right')
-            galleryHolder.removeClass('__moving-left').addClass('__moving-right');
-    }
-    clearDirection(){
-        galleryHolder.removeClass('__moving-left __moving-right');
+    updateProgressPercent(){
+        this.progressPercent = (this.position / this.totalWidth);
     }
     animate(){
+        this.isAnimated = true;
+
         galleryList.css({ transform: 'translateX('+ (this.position * -1) +'px)' });
-        scrollProgress.css({ transform: 'translateX('+ (this.scrolledPercent - 100) +'%)' });
-    }
-    loop(){
-        this.updatePosition();
+        progress.css({ transform: 'scaleX('+ (this.progressPercent) +')' });
 
-        this.checkBoundaries();
-
-        this.updateScrolledPercent();
-
-        this.animate();
-
-        this.loopID = requestAnimationFrame(() => this.loop());
-    }
-    stopLoop(){
-        cancelAnimationFrame(this.loopID)
+        let timeoutID = setTimeout(() => {
+            this.isAnimated = false;
+            clearTimeout(timeoutID);
+        }, 800);
     }
 
 }

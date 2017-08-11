@@ -56,8 +56,8 @@
                 fill: @white;
                 stroke: @gray;
                 stroke-width: 1px;
-                stroke-dasharray: 750;
-                stroke-dashoffset: 750;
+                stroke-dasharray: 850;
+                stroke-dashoffset: 850;
                 text-transform: uppercase;
             }
         }
@@ -124,7 +124,7 @@
 }
 
 @keyframes loading-text{
-    0% { stroke-dashoffset: 750; }
+    0% { stroke-dashoffset: 850; }
     100% { stroke-dashoffset: 0; }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -144,25 +144,6 @@
             }
         }
         & > .loader{ bottom: 96px; }
-    }
-
-}
-
-@media only screen and @phoneLandscape{
-
-    #loader-holder,
-    #common-loader-holder{
-        &:before,
-        &:after{
-            height: 3px;
-        }
-        & > .title-holder svg > .title-text{ font-size: 5em; }
-        & > .loader{
-            width: 180px;
-            height: 3px;
-            bottom: 60px;
-            margin-left: -90px;
-        }
     }
 
 }

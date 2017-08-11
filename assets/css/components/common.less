@@ -26,20 +26,16 @@ body,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #logo-holder{
     width: 90px;
-    height: 90px;
+    height: auto;
     overflow: hidden;
     & > a{
         display: block;
         width: 100%;
-        height: 100%;
+        height: auto;
         outline: none;
         overflow: hidden;
         & > .logo{
-            .circle{
-                fill: none;
-                stroke-width: 2px;
-                stroke: @black;
-            }
+            position: relative;
             .letters{
                 stroke: none;
                 fill: @black;
@@ -57,6 +53,7 @@ body,
 #header{
     width: 100%;
     height: auto;
+    min-height: 150px;
     position: fixed;
     top: 0;
     left: 0;
@@ -188,9 +185,21 @@ body,
         }
     }
     .close-menu-button{
+        width: 30px;
+        height: 30px;
         opacity: 0;
         transition: all .4s @easing 0s;
         visibility: hidden;
+        & > .icon{
+            display: block;
+            width: 100%;
+            height: 100%;
+            font-size: 1.5em;
+            color: @gold;
+            text-align: center;
+            line-height: 30px;
+            overflow: hidden;
+        }
     }
     .langs-holder{
         display: inline-block;
@@ -216,6 +225,10 @@ body,
                 }
             }
         }
+    }
+    &.__hidden{
+        opacity: 0;
+        visibility: hidden;
     }
 }
 
@@ -438,13 +451,13 @@ body,
         display: inline-block;
         li{
             display: inline-block;
-            & + li{ margin-left: 60px; }
+            & + li{ margin-left: 45px; }
             & > a{
                 display: inline-block;
                 .line{
                     display: inline-block;
                     vertical-align: middle;
-                    width: 60px;
+                    width: 45px;
                     height: 1px;
                     position: relative;
                     margin-right: 15px;
@@ -549,6 +562,53 @@ body,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  landscape start                           */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#landscape-holder{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background: @black;
+    overflow: hidden;
+    & > .inner{
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        overflow: hidden;
+        .icon{
+            display: block;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            font-size: 3em;
+            line-height: 60px;
+            text-align: center;
+            color: @white;
+            overflow: hidden;
+        }
+        .text{
+            display: block;
+            width: 100%;
+            height: auto;
+            font-size: 1em;
+            color: @white;
+            text-align: center;
+            overflow: hidden;
+        }
+    }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  landscape end                             */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  adaptive start                            */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 @media only screen and @tablet{
@@ -595,9 +655,12 @@ body,
             li{
                 & + li{ margin-left: 30px; }
                 & > a{
-                    .line:before{
-                        display: none;
-                        transition: none;
+                    .line{
+                        width: 45px;
+                        &:before{
+                            display: none;
+                            transition: none;
+                        }
                     }
                     .text{
                         display: inline-block;
@@ -625,82 +688,7 @@ body,
 
 @media only screen and @phoneLandscape{
 
-    #logo-holder{
-        width: 60px;
-        height: 60px;
-    }
-
-    #header{
-        &:before{ height: 3px; }
-        #logo-holder{ margin: 30px 0 0 30px; }
-        .open-menu-button,
-        .close-menu-button{
-            top: 39px;
-        }
-        .open-menu-button{
-            width: 60px;
-            height: 42px;
-            & > .circle:before{ display: none; }
-            & > .text{ display: none; }
-        }
-        .close-menu-button{
-            width: 42px;
-            height: 42px;
-            & > .icon{
-                width: 14px;
-                height: 14px;
-                font-size: .875em;
-                margin: -7px 0 0 -7px;
-            }
-        }
-        .langs-holder{
-            margin: 50px 30px 0 0;
-            ul li{
-                & + li{ margin-left: 15px; }
-                a{
-                    font-size: .875em;
-                    transition: none;
-                }
-                & > a:hover{ color: @black; }
-                &.active a { color: @gold; }
-            }
-        }
-    }
-
-    #menu{
-        .menu-holder{
-            ul li{
-                & + li{ margin-top: 15px; }
-                a{
-                    padding-left: 75px;
-                    font-size: 1.125em;
-                    &:before{ width: 60px; }
-                    &:hover{ color: @white;}
-                }
-            }
-        }
-        .socials-holder{
-            display: block;
-            left: 30px;
-            bottom: 30px;
-            ul li{
-                & + li{ margin-left: 30px; }
-                a{
-                    .line{ display: none; }
-                    .text{
-                        font-size: .875em;
-                        transition: none;
-                    }
-                    &:hover .text{ color: @white; }
-                }
-            }
-        }
-        .text-overlay{ font-size: 5em; }
-    }    
-
-    .categories-holder{ display: none; }
-
-    #progress-holder{ height: 3px; }
+    #landscape-holder{ display: block; }
 
 }
 
@@ -722,17 +710,6 @@ body,
         .close-menu-button{
             top: 30px;
         }
-        .close-menu-button{
-            width: 42px;
-            height: 42px;
-            top: 40px;
-            & > .icon{
-                width: 14px;
-                height: 14px;
-                font-size: .875em;
-                margin: -7px 0 0 -7px;
-            }
-        }
         .open-menu-button{
             width: 60px;
             height: 42px;
@@ -741,7 +718,7 @@ body,
             & > .text{ display: none; }
         }
         .langs-holder{
-            margin: 45px 30px 0 0;
+            margin: 30px 30px 0 0;
             ul li {
                 display: inline-block;
                 vertical-align: middle;
