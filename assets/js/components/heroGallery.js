@@ -183,7 +183,7 @@ class HeroGallery{
 
     handleScroll(e){
 
-        debounce(25, () => {
+        debounce(60, () => {
 
             if(!this.isEnabled || this.isAnimated) return;
 

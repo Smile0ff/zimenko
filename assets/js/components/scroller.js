@@ -59,7 +59,7 @@ class Scroller extends EventEmitter{
     handleMouseWheel(e){
         if(this.isAnimated) return;
 
-        debounce(25, () => {
+        debounce(60, () => {
             let delta = normalizeScroll(e.originalEvent);
 
             this.eventType = 'wheel';

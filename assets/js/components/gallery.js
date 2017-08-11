@@ -215,7 +215,7 @@ class Gallery extends EventEmitter{
     handleWheel(e){
         if(this.isAnimated || this.isPreview || this.isInfoActive) return;
 
-        debounce(25, () => {
+        debounce(60, () => {
             let delta = normalizeScroll(e.originalEvent);
 
             this.direction = (delta < 0) ? 'left' : 'right';
