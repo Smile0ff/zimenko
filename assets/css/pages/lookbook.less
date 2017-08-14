@@ -224,22 +224,7 @@ body,
                     height: auto;
                     position: relative;
                     & + .album-holder{ margin-top: 30px; }
-                    & > h2{
-                        top: auto;
-                        left: 30px;
-                        bottom: 30px;
-                        z-index: 5;
-                        transform: rotate(0deg) translateX(0%);
-                        & > span{
-                            font-size: 1.875em;
-                            font-weight: 300;
-                            color: @white;
-                            &.line,
-                            &.style{
-                                display: none;
-                            }
-                        }
-                    }
+                    & > h2{ display: none; }
                     .album{
                         width: 100%;
                         height: auto;
@@ -273,11 +258,7 @@ body,
                             }
                         }
                     }
-                    &.__colorized{
-                        .album .inner a figure img{
-                            filter: grayscale(0%);
-                        }
-                    }
+                    &.__colorized .album .inner a figure img{ filter: grayscale(0%); }
                 }
             }
         }
@@ -313,11 +294,16 @@ body,
         box-sizing: border-box;
         & > .categories-holder{
             ul{
+                display: block;
+                width: 100%;
+                text-align: left;
                 margin-top: 30px;
                 li{
-                    display: block;
-                    width: 100%;
-                    & + li{ margin: 5px 0 0 0; }
+                    display: inline-block;
+                    vertical-align: top;
+                    width: auto;
+                    & + li{ margin: 0 0 0 15px; }
+                    a .line{ display: none; }
                 }
             }
         }

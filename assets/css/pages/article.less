@@ -201,7 +201,7 @@ body,
         display: block;
         width: 100%;
         height: auto;
-        margin: 120px 0;
+        margin: 30px 0 120px;
         padding: 0 60px;
         box-sizing: border-box;
         overflow: hidden;
@@ -209,6 +209,47 @@ body,
             width: 180px;
             &.btn-prev{ float: left; }
             &.btn-next{ float: right; }
+        }
+    }
+}
+
+#scroll-top-holder{
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 120px;
+    overflow: hidden;
+    & > .inner{
+        width: 180px;
+        height: auto;
+        margin: 0 auto;
+        cursor: pointer;
+        overflow: hidden;
+        .icon,
+        .text{
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+        .icon{
+            font-size: 1.875em;
+            color: @black;
+            text-align: center;
+             transition: all .2s @easing 0s;
+        }
+        .text{
+            font-size: .875em;
+            color: @black;
+            margin-top: 15px;
+            text-align: center;
+            transition: all .2s @easing 0s;
+        }
+        &:hover{
+            .icon,
+            .text{
+                color: @gold;
+            }
         }
     }
 }
@@ -280,7 +321,7 @@ body,
             display: block;
             width: 100%;
             height: auto;
-            margin: 60px 0;
+            margin: 30px 0 60px;
             padding: 0 60px;
             justify-content: none;
             & > .btn{
@@ -290,6 +331,18 @@ body,
                 & > a{
                     &:before{ display: none; }
                     &:hover .text{ color: @black; }
+                }
+            }
+        }
+    }
+
+    #scroll-top-holder{
+        margin-top: 60px;
+        & > .inner{
+            &:hover{
+                .icon,
+                .text{
+                    color: @black;
                 }
             }
         }
@@ -367,7 +420,7 @@ body,
             display: block;
             width: 100%;
             height: auto;
-            margin: 60px 0;
+            margin: 30px 0 60px;
             padding: 0 30px;
             justify-content: none;
             & > .btn{
@@ -378,7 +431,7 @@ body,
             }
         }
     }
-
+    
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  adaptive end                              */

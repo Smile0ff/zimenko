@@ -648,6 +648,35 @@
         }
         .arrows-holder{ display: none; }
     }
+    
+    .categories-holder{
+        display: block;
+        width: 100%;
+        height: auto;
+        top: auto;
+        right: auto;
+        bottom: 180px;
+        padding: 0 30px;
+        box-sizing: border-box;
+        transform: rotate(0deg) translateX(0%);
+        ul{
+            display: block;
+            width: 100%;
+            height: auto;
+            text-align: center;
+            overflow: hidden;
+            li{
+                a{
+                    .line{ display: none; }  
+                    font-size: .875em;
+                }
+            }
+        }
+    }
+
+    #page.__menu-active{
+        .categories-holder{ display: none; }
+    }
 
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

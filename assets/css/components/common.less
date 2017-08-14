@@ -50,32 +50,34 @@ body,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  header start  			                  */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-#header{
+#top-lane{
+    display: block;
     width: 100%;
-    height: auto;
-    min-height: 150px;
+    height: 6px;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 15;
+    content: "";
+    background: @gold;
+    transition: all .4s @easing 0s;
+    transform-origin: 0% 0%;
+    transform: scaleX(1);
+    overflow: hidden;
+}
+
+#header{
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6;
     opacity: 1;
     transition: all .4s @easing 0s;
     visibility: visible;
     overflow: hidden;
-    &:before{
-        display: block;
-        width: 100%;
-        height: 6px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        background: @gold;
-        transition: all .4s @easing 0s;
-        transform-origin: 0% 0%;
-        transform: scaleX(1);
-        overflow: hidden;
-    }
     #logo-holder{
         float: left;
         margin: 60px 0 0 60px;
@@ -90,8 +92,7 @@ body,
             }
         }
     }
-    .open-menu-button,
-    .close-menu-button{
+    .open-menu-button{
         position: absolute;
         top: 60px;
         left: 50%;
@@ -184,23 +185,6 @@ body,
             }
         }
     }
-    .close-menu-button{
-        width: 30px;
-        height: 30px;
-        opacity: 0;
-        transition: all .4s @easing 0s;
-        visibility: hidden;
-        & > .icon{
-            display: block;
-            width: 100%;
-            height: 100%;
-            font-size: 1.5em;
-            color: @gold;
-            text-align: center;
-            line-height: 30px;
-            overflow: hidden;
-        }
-    }
     .langs-holder{
         display: inline-block;
         float: right;
@@ -226,39 +210,6 @@ body,
             }
         }
     }
-    &.__hidden{
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-#page.__menu-active #header{
-    &:before{ transform: scaleX(0); }
-    #logo-holder{
-        & > a .logo{
-            .circle{ stroke: @white; }
-            .letters{ fill: @white; }
-        }
-    }
-    .open-menu-button{
-        opacity: 0;
-        visibility: hidden;
-        transition: all .4s @easing 0s;
-    }
-    .close-menu-button{
-        opacity: 1;
-        visibility: visible;
-        transition: all .4s @easing .4s;
-    }
-    .langs-holder{
-        ul li{
-            a{ color: @white; }
-            &.active a,
-            & > a:hover{
-                color: @gold;
-            }
-        }
-    }   
 }
 
 #page.__hold-start #header,
@@ -267,10 +218,22 @@ body,
     transition: all .4s @easing 1.6s;
     pointer-events: none;
     visibility: hidden;
-    &:before{
-        transform: scaleX(0);
-        transition: all 1.6s @easing 0s;
-    }
+}
+
+#page.__hold-start #top-lane,
+#page.__hold-active #top-lane{
+    transform: scaleX(0);
+    transition: all 1.6s @easing 0s;
+}
+
+#page.__menu-active #header{
+    opacity: 0;
+    transition: all .4s @easing .4s;
+    visibility: hidden;
+}
+
+#page.__menu-active #top-lane{
+    transform: scaleX(0);
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  header end                			      */
@@ -291,6 +254,83 @@ body,
     transform: translateY(-100%);
     visibility: hidden;
     overflow: hidden;
+    .top-holder{
+        width: 100%;
+        height: auto;
+        position: relative;
+        opacity: 0;
+        transition: all .2s @easing 0s;
+        visibility: hidden;
+        overflow: hidden;
+        & > .logo-holder{
+            width: 90px;
+            height: auto;
+            float: left;
+            margin: 60px 0 0 60px;
+            overflow: hidden;
+            & > a{
+                display: block;
+                width: 100%;
+                height: auto;
+                outline: none;
+                overflow: hidden;
+                & > .logo{
+                    position: relative;
+                    .letters{
+                        stroke: none;
+                        fill: @white;
+                    }
+                }
+            }
+        }
+        & > .close-menu-button{
+            width: 45px;
+            height: 45px;
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            cursor: pointer;
+            transform: translateX(-50%);
+            overflow: hidden;
+            .icon{
+                display: block;
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                font-size: 1.5em;
+                color: @gold;
+                transform: translateX(-50%) translateY(-50%);
+                overflow: hidden;
+            }
+        }
+        & > .langs-holder{
+            display: inline-block;
+            float: right;
+            margin: 60px 60px 0 0;
+            overflow: hidden;
+            ul{
+                display: inline-block;
+                li{
+                    display: inline-block;
+                    & + li{ margin-left: 15px; }
+                    a{
+                        display: inline-block;
+                        font-size: 1em;
+                        color: @white;
+                        text-transform: uppercase;
+                        transition: all .2s @easing 0s;
+                        overflow: hidden;
+                    }
+                    &.active a,
+                    & > a:hover{
+                        color: @gold;
+                    }
+                }
+            }
+        }
+    }
     .menu-holder{
         width: 100%;
         height: auto;
@@ -413,20 +453,15 @@ body,
 #page.__menu-active #menu{
     transform: translateY(0%);
     visibility: visible;
-    .menu-holder{
-        opacity: 1;
-        visibility: visible;
-        transition: all .4s @easing .4s;
-    }
-    .socials-holder{
-        opacity: 1;
-        visibility: visible;
-        transition: all .4s @easing .4s;
-    }
+    .top-holder,
+    .menu-holder,
+    .socials-holder,
     .text-overlay{
         opacity: 1;
-        transition: all 1.2s @easing 0s;
+        visibility: visible;
+        transition: all .4s @easing .4s;
     }
+    .text-overlay{ transition: all 1.2s @easing 0s; }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*  menu end                                  */
@@ -694,21 +729,13 @@ body,
 
 @media only screen and @phonePortrait{ 
 
-    #logo-holder{
-        width: 60px;
-        height: 60px;
-    }
+    #logo-holder{ width: 60px; }
+
+    #top-lane{ height: 3px; }
 
     #header{
-        &:before{
-            height: 3px;
-        }
         #logo-holder{
             margin: 30px 0 0 30px;
-        }
-        .open-menu-button,
-        .close-menu-button{
-            top: 30px;
         }
         .open-menu-button{
             width: 60px;
@@ -728,7 +755,32 @@ body,
     }
     
     #menu{
+        .top-holder{
+            & > .logo-holder{
+                width: 60px;
+                margin: 30px 0 0 30px;
+            }
+            & > .close-menu-button{
+                width: 30px;
+                height: 30px;
+                top: 30px;
+                .icon{
+                    width: 20px;
+                    height: 20px;
+                    font-size: 1.25em;
+                }
+            }
+            & > .langs-holder{
+                margin: 30px 30px 0 0;
+                ul li {
+                    display: inline-block;
+                    vertical-align: middle;
+                    a{ font-size: .875em; }
+                }
+            }
+        }
         .menu-holder{
+            margin-top: 90px;
             ul li{
                 & + li{ margin-top: 20px; }
                 a{
@@ -757,8 +809,13 @@ body,
                 }
             }
         }
-        .text-overlay{ font-size: 3.75em; }
+        .text-overlay{
+            font-size: 3.75em;
+            margin-top: -90px;
+        }
     }
+
+    .categories-holder{ display: none; }
 
     #progress-holder{ height: 3px; }
 
